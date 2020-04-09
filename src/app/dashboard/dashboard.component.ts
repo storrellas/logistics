@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatMenuModule } from '@angular/material/menu';
 
+
+import { faExclamation, faWrench, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
+
+ 
 
 @Component({
   selector: 'app-dashboard',
@@ -8,10 +11,17 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  faExclamation = faExclamation;
+  faWrench = faWrench;
+  faGraduationCap = faGraduationCap;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onClickMe() {
+    console.log("Taking my time")
   }
 
 }
