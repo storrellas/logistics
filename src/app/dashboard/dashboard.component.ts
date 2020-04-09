@@ -3,30 +3,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 
 
 import { faExclamation, faWrench, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../modal/modal.component';
 
-
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
-})
-export class DialogOverviewExampleDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-}
 
 @Component({
   selector: 'app-dashboard',
@@ -43,6 +22,8 @@ export class DashboardComponent implements OnInit {
   session_init: string;
   table_header: string[]; 
 
+
+
   constructor(public dialog: MatDialog) { 
     this.user = "MyUser";
     this.company = "MyCompany";
@@ -53,9 +34,9 @@ export class DashboardComponent implements OnInit {
 
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: {name: "this.name", animal: "this.animal"}
+    const dialogRef = this.dialog.open(ModalComponent, {
+      width: '400px',
+      data: {name: "Sergi", animal: "Zeebra"}
     });
 
     dialogRef.afterClosed().subscribe(result => {
