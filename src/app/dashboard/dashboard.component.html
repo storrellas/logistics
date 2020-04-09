@@ -1,11 +1,33 @@
-<div style="width:100%; height: 3em; background-color:purple; 
-            display:flex; color: white; align-items: center;
-            justify-content: space-between"> 
+<style>
+
+.full-width {
+  width: 100%;
+}
+/* Toolbar */
+.toolbar {
+  height: 3em; 
+  background-color:purple; 
+  display:flex; 
+  color: white; 
+  align-items: center;
+  justify-content: space-between
+}
+.toolbar-button:hover {
+  border: 1px solid grey;
+}
+
+/* Table */
+
+
+
+</style>
+
+<div class="full-width toolbar"> 
   
   <div> PORTIC LOGO </div>
-  <div> <b>Usuario:</b> 123456789</div>
-  <div> <b>Empresa:</b> 123456789</div>
-  <div> <b>Inicio Sesión:</b> 12/03/20 08:38</div>
+  <div> <b>Usuario:</b> {{user}}</div>
+  <div> <b>Empresa:</b> {{company}}</div>
+  <div> <b>Inicio Sesión:</b>{{session_init}}</div>
 
   <div style="display: flex; justify-content: space-between">
 
@@ -22,18 +44,28 @@
   </div>
 </div>
 
-<div style="width: 100%; height: 3em; background-color: blue; margin-top: 1em;">
+<div class="full-width" style="height: 3em; background-color: blue; margin-top: 1em;">
   Here add main tools
 </div>
 
 
-<div style="width: 100%; height: 3em; background-color: blue; margin-top: 1em;">
+<div class="full-width" style="width: 100%; height: 3em; background-color: blue; margin-top: 1em;">
   Here add filtering controls
 </div>
 
-<div style="width: 100%; height: 3em; background-color: blue; margin-top: 1em;">
+<div class="full-width" style="width: 100%; height: 3em; background-color: blue; margin-top: 1em;">
   Here add tools to interact with elements
 </div>
+
+
+<div class="full-width" style="width: 100%; height: 3em; background-color: blue; margin-top: 1em;">
+    <table>
+      <tr style="color: purple; font-weight: bold; border: 1px solid purple;">
+        <th *ngFor="let header of table_header">{{header}}</th>
+      </tr>
+    </table>
+</div>
+  
 
 
 

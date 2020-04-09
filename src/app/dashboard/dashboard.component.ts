@@ -15,7 +15,18 @@ export class DashboardComponent implements OnInit {
   faWrench = faWrench;
   faGraduationCap = faGraduationCap;
 
-  constructor() { }
+  user: string;
+  company: string;
+  session_init: string;
+  table_header: string[];
+
+  constructor() { 
+    this.user = "MyUser";
+    this.company = "MyCompany";
+    this.session_init = "12/03/20 08:38";
+    this.table_header = ["Barco", "Llegada", "Salida", "Tipo Doc", "Tipo Carga", "Emisor",
+                          "Receptor", "Estado", "Fecha", "No Documento", "Versión", "Usuario", "Estado Resguardo"]
+  }
 
   ngOnInit(): void {
   }
