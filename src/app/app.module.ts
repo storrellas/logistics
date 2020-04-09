@@ -9,6 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
@@ -24,10 +27,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatSliderModule,
     MatMenuModule,
     MatButtonModule,
+    MatDialogModule,
     FontAwesomeModule,
     
   ],
-  providers: [],
+  providers: [MatDialog],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
