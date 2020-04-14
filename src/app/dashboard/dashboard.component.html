@@ -2,6 +2,7 @@
 
 .full-width {
   width: 100%;
+  margin-top: 1em;
 }
 /* Toolbar */
 .toolbar {
@@ -16,7 +17,50 @@
   border: 1px solid grey;
 }
 
+/* Main Menu */
+.main-menu-button {
+  margin-right: 5px; 
+  border: 0px;
+  color: purple;
+}
+.main-menu-button:hover {
+  background: #ECDAEC;
+  
+}
+.main-menu-container-button{
+  padding-left: 10px;
+  padding-right: 10px;
+  border-right: 1px solid purple;
+}
+
 /* Table */
+.doc-table {
+  border-spacing: 0;
+  border-collapse: separate;
+  text-align: center;
+  font-size: 12px;
+  border: 1px solid purple;
+}
+.doc-table-title {
+  color: purple; 
+  font-weight: bold; 
+  background: #c68cc6;
+  /*#800080,#922492,#A448A4,#B66DB6,#C891C8,#DAB6DA,#ECDAEC*/
+}
+.doc-table-title th{
+  border: 1px solid purple;
+}
+.doc-table-body{
+  color: black; 
+}
+.doc-table-body td{
+  border-left: 1px solid purple;
+  border-right: 1px solid purple;
+  height: 22px;
+}
+.doc-table tr:nth-child(even){
+  background: #ECDAEC;
+}
 
 
 
@@ -44,24 +88,87 @@
   </div>
 </div>
 
-<div class="full-width" style="height: 3em; background-color: blue; margin-top: 1em;">
-  Here add main tools
+<div style="padding: 10px">
+
+  <div class="full-width" style="display: flex">
+    <div class="main-menu-container-button">
+      <a mat-stroked-button routerLink="." class="main-menu-button">Lista de Documentos</a>
+    </div>
+    <div class="main-menu-container-button">
+      <a mat-stroked-button routerLink="." class="main-menu-button">Nueva Lista de Carga</a>
+    </div>
+    
+    <div class="main-menu-container-button">
+      <a mat-stroked-button routerLink="." class="main-menu-button">Nueva Lista de Descarga</a>
+    </div>
+
+    <div class="main-menu-container-button" style="border: 0px">
+      <a mat-stroked-button routerLink="." class="main-menu-button">Preferencias</a>
+    </div>
+
+     
+  </div>
+
+
+  <div class="full-width" style="height: 150px; background-color: blue; display: flex; align-items: center">
+
+      <mat-form-field>
+          <mat-label>Favorite food</mat-label>
+          <mat-select>
+            <mat-option value="test1">test1</mat-option>
+            <mat-option value="test2">test2</mat-option>
+            <mat-option value="test3">test3</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      <select required style="width: 100px; margin-right: 10px">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+    <mat-form-field style="width: 100px; margin-right: 10px">
+        <select matNativeControl required>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+    </mat-form-field>
+    <mat-form-field style="width: 100px">
+      <input matInput value="Sushi">
+    </mat-form-field>
+    <div>--</div>
+  </div>
+
+  <div class="full-width" style="height: 3em; background-color: blue;">
+    Here add tools to interact with elements
+  </div>
+
+
+  <div class="full-width">
+      <table class="doc-table full-width">
+        <tr class="doc-table-title">
+          <th *ngFor="let header of table_header">{{header}}</th>
+        </tr>
+        <tr *ngFor="let data of table_data" class="doc-table-body">
+            <td>{{data.ship}}</td>
+            <td>{{data.arrival}}</td>
+            <td>{{data.departure}}</td>
+            <td>{{data.doc_type}}</td>
+            <td>{{data.cargo_type}}</td>
+            <td>{{data.emiter}}</td>
+            <td>{{data.receiver}}</td>
+            <td>{{data.status}}</td>
+            <td>{{data.date}}</td>
+            <td>{{data.id}}</td>
+            <td>{{data.version}}</td>
+            <td>{{data.user}}</td>
+            <td>{{data.receipt_status}}</td>
+        </tr>
+      </table>
+  </div>
+
 </div>
 
 
-<div class="full-width" style="width: 100%; height: 3em; background-color: blue; margin-top: 1em;">
-  Here add filtering controls
-</div>
-
-<div class="full-width" style="width: 100%; height: 3em; background-color: blue; margin-top: 1em;">
-  Here add tools to interact with elements
-</div>
-
-
-<div class="full-width" style="width: 100%; height: 3em; background-color: blue; margin-top: 1em;">
-    <table>
-      <tr style="color: purple; font-weight: bold; border: 1px solid purple;">
-        <th *ngFor="let header of table_header">{{header}}</th>
-      </tr>
-    </table>
-</div>
