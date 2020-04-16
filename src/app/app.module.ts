@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 // Declarations
@@ -34,6 +36,7 @@ import { ModalComponent } from './modal/modal.component';
     ModalComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

@@ -33,6 +33,13 @@
   border-right: 1px solid purple;
 }
 
+
+/* Tool */
+.filter-tool {
+  color: purple;  
+  background: #c68cc6;
+  border-color: purple;  
+}
 /* Table */
 .doc-table {
   border-spacing: 0;
@@ -42,7 +49,7 @@
   border: 1px solid purple;
 }
 .doc-table-title {
-  color: purple; 
+  color: purple;
   font-weight: bold; 
   background: #c68cc6;
   /*#800080,#922492,#A448A4,#B66DB6,#C891C8,#DAB6DA,#ECDAEC*/
@@ -111,34 +118,28 @@
 
 
   <div class="full-width" style="height: 150px; background-color: blue; display: flex; align-items: center">
-
-      <mat-form-field>
-          <mat-label>Favorite food</mat-label>
-          <mat-select>
-            <mat-option value="test1">test1</mat-option>
-            <mat-option value="test2">test2</mat-option>
-            <mat-option value="test3">test3</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-      <select required style="width: 100px; margin-right: 10px">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-    <mat-form-field style="width: 100px; margin-right: 10px">
-        <select matNativeControl required>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-    </mat-form-field>
-    <mat-form-field style="width: 100px">
-      <input matInput value="Sushi">
-    </mat-form-field>
+  
+    <div ngbDropdown class="filter-tool d-inline-block" style="width: 150px">
+      <button class="filter-tool btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem>Action - 1</button>
+        <button ngbDropdownItem>Another Action</button>
+        <button ngbDropdownItem>Something else is here</button>
+      </div>
+    </div>
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
     <div>--</div>
+    <div ngbDropdown class="filter-tool d-inline-block" style="width: 150px">
+      <button class="filter-tool btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem>Action - 1</button>
+        <button ngbDropdownItem>Another Action</button>
+        <button ngbDropdownItem>Something else is here</button>
+      </div>
+    </div>
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+
+
   </div>
 
   <div class="full-width" style="height: 3em; background-color: blue;">
