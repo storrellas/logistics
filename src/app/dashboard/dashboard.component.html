@@ -1,9 +1,6 @@
 <style>
 
-.full-width {
-  width: 100%;
-  margin-top: 1em;
-}
+
 /* Toolbar */
 .toolbar {
   height: 3em; 
@@ -25,7 +22,6 @@
 }
 .main-menu-button:hover {
   background: #ECDAEC;
-  
 }
 .main-menu-container-button{
   padding-left: 10px;
@@ -33,13 +29,51 @@
   border-right: 1px solid purple;
 }
 
+/* Filtering */
+.filtering-btn{
+  border: 0px; 
+  border-radius: 5px; 
+  color: white;
+  padding: 0.7em 1em 0.7em 1em;
+  background: purple;
+  font-weight: 500;
+  outline: none;
+  box-shadow: none;    
+}
+
+.filtering-btn:hover{
+  background: #922492;
+}
+
+.filtering-btn:active{
+  background: #6D006D;
+}
 
 /* Tool */
-.filter-tool {
-  color: purple;  
-  background: #c68cc6;
-  border-color: purple;  
+.doc-tool-btn{
+  border: 0px; 
+  border-radius: 5px; 
+  color: purple;
+  padding: 0.7em 1em 0.7em 1em;
+  outline: none;
+  box-shadow: none;  
+  font-weight: 500; 
 }
+
+.doc-tool-btn:hover{
+  background: #ECDAEC;
+}
+.doc-tool-btn:active{
+  color: white;
+  background: #A978A9;
+}
+.doc-tool-btn-disabled, .doc-tool-btn-disabled:hover{
+  color: grey;
+  background: transparent;
+  cursor: initial;
+}
+
+
 /* Table */
 .doc-table {
   border-spacing: 0;
@@ -73,7 +107,7 @@
 
 </style>
 
-<div class="full-width toolbar"> 
+<div class="w-100 toolbar"> 
   
   <div> PORTIC LOGO </div>
   <div> <b>Usuario:</b> {{user}}</div>
@@ -97,7 +131,7 @@
 
 <div style="padding: 10px">
 
-  <div class="full-width" style="display: flex">
+  <div class="w-100 mt-3" style="display: flex">
     <div class="main-menu-container-button">
       <a mat-stroked-button routerLink="." class="main-menu-button">Lista de Documentos</a>
     </div>
@@ -115,7 +149,7 @@
   </div>
 
 
-  <div class="full-width" style="height: 150px; background-color: blue; display: flex; align-items: center">
+  <div class="w-100 mt-3" style="padding: 1em; background: #c68cc6; display: flex; align-items: center">
     <div class="row">
         <div class="col">
           <select class="form-control" id="exampleFormControlSelect1">
@@ -176,20 +210,29 @@
               </select>
             </div>
           <div class="col" style="display: flex; align-content: center">
-            <button type="button" class="btn btn-secondary">Buscar</button>
+            <button type="button" class="filtering-btn">Buscar</button>
           </div>
     </div>  
 
 
   </div>
 
-  <div class="full-width" style="height: 3em; background-color: blue;">
-    Here add tools to interact with elements
+  <div class="w-100 mt-3" style="border: 1px solid purple; padding: 1em; display: flex; justify-content: space-between">
+      <button type="button" class="doc-tool-btn doc-tool-btn-disabled">DUAs</button>
+      <button type="button" class="doc-tool-btn">Fusionar</button>
+      <button type="button" class="doc-tool-btn">Imprimir</button>
+      <button type="button" class="doc-tool-btn">Historico</button>
+      <button type="button" class="doc-tool-btn">Editar</button>
+      <button type="button" class="doc-tool-btn">Eliminar</button>
+      <button type="button" class="doc-tool-btn">Ver</button>
+      <button type="button" class="doc-tool-btn">Enviar</button>
+      <button type="button" class="doc-tool-btn">Enviar a resguardo</button>
+
   </div>
 
 
-  <div class="full-width">
-      <table class="doc-table full-width">
+  <div class="w-100 mt-3">
+      <table class="doc-table w-100">
         <tr class="doc-table-title">
           <th *ngFor="let header of table_header">{{header}}</th>
         </tr>
