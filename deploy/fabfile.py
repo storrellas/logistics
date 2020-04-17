@@ -80,66 +80,72 @@ def provision(c):
     """
     print_init_banner('provision: Installs dependencies')
 
-    # Update System
-    logger.info("Installing Dependencies ... ")
-    c.run('sudo apt update', echo=True)
+    # # Update System
+    # logger.info("Installing Dependencies ... ")
+    # c.run('sudo apt update', echo=True)
 
-    # Update System
-    logger.info("Installing Dependencies ... ")
-    c.run('sudo apt update', echo=True)
+    # # Update System
+    # logger.info("Installing Dependencies ... ")
+    # c.run('sudo apt update', echo=True)
 
-    # Remove former
-    c.run('sudo apt-get remove docker docker-engine docker.io containerd runc', echo=True)
+    # # Remove former
+    # c.run('sudo apt-get remove docker docker-engine docker.io containerd runc', echo=True)
 
-    # Install dependencies
-    c.run('sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common', echo=True)
+    # # Install dependencies
+    # c.run('sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common', echo=True)
 
-    # Add GPG key
-    c.run('sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -', echo=True)
+    # # Add GPG key
+    # c.run('sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -', echo=True)
 
 
-    # Verify
-    output = c.run('sudo apt-key fingerprint 0EBFCD88', echo=True)
-    if len(output.stdout) <= 0:
-        raise Exception("Verification failed")
+    # # Verify
+    # output = c.run('sudo apt-key fingerprint 0EBFCD88', echo=True)
+    # if len(output.stdout) <= 0:
+    #     raise Exception("Verification failed")
     
-    # Add repository
-    c.run('sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"', echo=True)
+    # # Add repository
+    # c.run('sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"', echo=True)
 
-    # Install docker
-    c.run('sudo apt update', echo=True)
-    c.run('sudo apt-get -y install docker-ce docker-ce-cli containerd.io', echo=True)
-    c.run('docker --version', echo=True)
+    # # Install docker
+    # c.run('sudo apt update', echo=True)
+    # c.run('sudo apt-get -y install docker-ce docker-ce-cli containerd.io', echo=True)
+    # c.run('docker --version', echo=True)
 
-    # Install nginx    
-    c.run('sudo apt-get -y install nginx', echo=True)
+    # # Install nginx    
+    # c.run('sudo apt-get -y install nginx', echo=True)
 
-    # Install docker-compose
-    c.run('sudo curl -L \
-            \"https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)\" \
-            -o /usr/local/bin/docker-compose', echo=True)
-    c.run('sudo chmod +x /usr/local/bin/docker-compose', echo=True)
-    c.run('docker-compose --version', echo=True)
+    # # Install docker-compose
+    # c.run('sudo curl -L \
+    #         \"https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)\" \
+    #         -o /usr/local/bin/docker-compose', echo=True)
+    # c.run('sudo chmod +x /usr/local/bin/docker-compose', echo=True)
+    # c.run('docker-compose --version', echo=True)
 
-    # Install certbot
-    c.run('sudo add-apt-repository universe', echo=True)
-    c.run('sudo add-apt-repository ppa:certbot/certbot', echo=True)
-    c.run('sudo apt update', echo=True)
-    c.run('sudo apt install -y certbot', echo=True)
+    # # Install certbot
+    # c.run('sudo add-apt-repository universe', echo=True)
+    # c.run('sudo add-apt-repository ppa:certbot/certbot', echo=True)
+    # c.run('sudo apt update', echo=True)
+    # c.run('sudo apt install -y certbot', echo=True)
 
     # Add openfortivpn
     c.run('sudo apt install -y openfortivpn', echo=True)
 
     # Install sqlclient
+    logger.info("Creating folder")
+    c.run('sudo rm -r oracle_download')        
     c.run('mkdir oracle_download')
-    c.run('cd oracle_download')
-    c.run('sudo apt install -y unzip libaio1 alien')
-    c.run('wget https://download.oracle.com/otn_software/linux/instantclient/19600/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm')
-    c.run('sudo alien oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm --scripts')
-    c.run('sudo dpkg -i oracle-instantclient19.6-basic_19.6.0.0.0-2_amd64.deb')
-    c.run('wget https://download.oracle.com/otn_software/linux/instantclient/19600/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm')
-    c.run('sudo alien oracle-instantclient19.6-sqlplus-19.6.0.0.0-1.x86_64.rpm --scripts')
-    c.run('sudo dpkg -i oracle-instantclient19.6-sqlplus_19.6.0.0.0-2_amd64.deb')
+
+    # Download
+    with c.cd('oracle_download'):
+        c.run('sudo apt install -y unzip libaio1 alien', echo=True)
+        c.run('wget https://download.oracle.com/otn_software/linux/instantclient/19600/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm', echo=True)
+        c.run('sudo alien -v oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm --scripts', echo=True)
+        c.run('sudo dpkg -i oracle-instantclient19.6-basic_19.6.0.0.0-2_amd64.deb', echo=True)
+        c.run('wget https://download.oracle.com/otn_software/linux/instantclient/19600/oracle-instantclient19.6-sqlplus-19.6.0.0.0-1.x86_64.rpm', echo=True)
+        c.run('sudo alien -v oracle-instantclient19.6-sqlplus-19.6.0.0.0-1.x86_64.rpm --scripts', echo=True)
+        c.run('sudo dpkg -i oracle-instantclient19.6-sqlplus_19.6.0.0.0-2_amd64.deb', echo=True)
+
+    # Generate service
 
     print_end_banner()
 
