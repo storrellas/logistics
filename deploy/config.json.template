@@ -5,5 +5,10 @@
    "branch": "master",
    "app_domain": "trydev.sport-planner.com",
    "git_key_public": "/home/vagrant/.ssh/storrellas.pub",
-   "git_key_private": "/home/vagrant/.ssh/storrellas"
+   "git_key_private": "/home/vagrant/.ssh/storrellas",
+   "openfortivpn_host": "host",
+   "openfortivpn_port": "port",
+   "openfortivpn_user": "user",
+   "openfortivpn_password": "pasword",
+   "openfortivpn_trusted_cert": "certificate"
 }
