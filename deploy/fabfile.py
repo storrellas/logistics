@@ -5,22 +5,15 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/..')
 
 # Fabric imports
 from fabric import task
-from tryasport_api import utils
+import utils
 
 # Configure hosts
 aws_stag = {}
-aws_stag['host'] = 'ubuntu@trydev.sport-planner.com'
-aws_stag['connect_kwargs'] = {"key_filename": os.path.expanduser("~") +  "/.ssh/trynewsport.pem"}
-
-aws_pro = {}
-aws_pro['host'] = 'ubuntu@try.sport-planner.com'
-aws_pro['connect_kwargs'] = {"key_filename": os.path.expanduser("~") +  "/.ssh/trynewsport.pem"}
+aws_stag['host'] = 'ubuntu@portic.sopradigitalfactory.com'
+aws_stag['connect_kwargs'] = {"key_filename": os.path.expanduser("~") +  "/.ssh/951-digitalfactory-portic.pem"}
 
 my_hosts = [aws_stag]
 #my_hosts = [aws_pro]
-
-if aws_pro in my_hosts:
-    input("You are about to deploy to production. Press any key ...")
 
 # Create logger
 logger = utils.get_logger()
