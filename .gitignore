@@ -47,3 +47,6 @@ Thumbs.db
 
 # User defined
 tutorial.txt
+
+# Python venv
+/deploy/venv
