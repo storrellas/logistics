@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 // Declarations
 import { DashboardComponent } from './dashboard.component';
+import { ModalComponent } from './modal/modal.component';
 
 // Imports - Other
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,7 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Providers
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from './modal/modal.component';
+
 
 @NgModule({
   declarations: [
@@ -44,3 +45,5 @@ import { ModalComponent } from './modal/modal.component';
 
 })
 export class DashboardModule { }
+
+export { DashboardComponent } from './dashboard.component';
