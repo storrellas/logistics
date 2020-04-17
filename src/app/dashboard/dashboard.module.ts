@@ -18,7 +18,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Providers
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from '../modal/modal.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [

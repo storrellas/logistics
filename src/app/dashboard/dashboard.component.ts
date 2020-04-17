@@ -4,7 +4,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 
 import { faExclamation, faWrench, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from '../modal/modal.component';
+import { ModalComponent } from './modal/modal.component';
 
 // class Document {
 //   constructor(public ship: string, public arrival: string, public departure: string, 
