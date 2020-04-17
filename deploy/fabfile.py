@@ -80,62 +80,82 @@ def provision(c):
     """
     print_init_banner('provision: Installs dependencies')
 
-    # # Update System
-    # logger.info("Installing Dependencies ... ")
-    # c.run('sudo apt update', echo=True)
+    # Update System
+    logger.info("Installing Dependencies ... ")
+    c.run('sudo apt update', echo=True)
 
-    # # Update System
-    # logger.info("Installing Dependencies ... ")
-    # c.run('sudo apt update', echo=True)
+    # Update System
+    logger.info("Installing Dependencies ... ")
+    c.run('sudo apt update', echo=True)
 
-    # # Remove former
-    # c.run('sudo apt-get remove docker docker-engine docker.io containerd runc', echo=True)
+    # Remove former
+    c.run('sudo apt-get remove docker docker-engine docker.io containerd runc', echo=True)
 
-    # # Install dependencies
-    # c.run('sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common', echo=True)
+    # Install dependencies
+    c.run('sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common', echo=True)
 
-    # # Add GPG key
-    # c.run('sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -', echo=True)
+    # Add GPG key
+    c.run('sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -', echo=True)
 
 
-    # # Verify
-    # output = c.run('sudo apt-key fingerprint 0EBFCD88', echo=True)
-    # if len(output.stdout) <= 0:
-    #     raise Exception("Verification failed")
+    # Verify
+    output = c.run('sudo apt-key fingerprint 0EBFCD88', echo=True)
+    if len(output.stdout) <= 0:
+        raise Exception("Verification failed")
     
-    # # Add repository
-    # c.run('sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"', echo=True)
+    # Add repository
+    c.run('sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"', echo=True)
 
-    # # Install docker
-    # c.run('sudo apt update', echo=True)
-    # c.run('sudo apt-get -y install docker-ce docker-ce-cli containerd.io', echo=True)
-    # c.run('docker --version', echo=True)
+    # Install docker
+    c.run('sudo apt update', echo=True)
+    c.run('sudo apt-get -y install docker-ce docker-ce-cli containerd.io', echo=True)
+    c.run('docker --version', echo=True)
 
-    # # Install nginx    
-    # c.run('sudo apt-get -y install nginx', echo=True)
+    # Install nginx    
+    c.run('sudo apt-get -y install nginx', echo=True)
 
-    # # Install docker-compose
-    # c.run('sudo curl -L \
-    #         \"https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)\" \
-    #         -o /usr/local/bin/docker-compose', echo=True)
-    # c.run('sudo chmod +x /usr/local/bin/docker-compose', echo=True)
-    # c.run('docker-compose --version', echo=True)
+    # Install docker-compose
+    c.run('sudo curl -L \
+            \"https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)\" \
+            -o /usr/local/bin/docker-compose', echo=True)
+    c.run('sudo chmod +x /usr/local/bin/docker-compose', echo=True)
+    c.run('docker-compose --version', echo=True)
 
-    # # Install certbot
-    # c.run('sudo add-apt-repository universe', echo=True)
-    # c.run('sudo add-apt-repository ppa:certbot/certbot', echo=True)
-    # c.run('sudo apt update', echo=True)
-    # c.run('sudo apt install -y certbot', echo=True)
+    # Install certbot
+    c.run('sudo add-apt-repository universe', echo=True)
+    c.run('sudo add-apt-repository ppa:certbot/certbot', echo=True)
+    c.run('sudo apt update', echo=True)
+    c.run('sudo apt install -y certbot', echo=True)
 
     # Add openfortivpn
     c.run('sudo apt install -y openfortivpn', echo=True)
+    if c.run('test -d {}'.format('openfortivpn_download'), warn=True).failed:
+        pass
+    else:
+        logger.info("Delete folder")
+        c.run('sudo rm -r openfortivpn_download', echo=True)
+    c.run('mkdir openfortivpn_download', echo=True)
+    with c.cd('openfortivpn_download'):
+        c.put('./etc_init_d_openfortivpn.template', remote='./openfortivpn_download')
+        c.run('sed -i "s/{{openfortivpn_host}}/' + config['openfortivpn_host'] + '/g" etc_init_d_openfortivpn.template', echo=True)
+        c.run('sed -i "s/{{openfortivpn_port}}/' + config['openfortivpn_port'] + '/g" etc_init_d_openfortivpn.template', echo=True)
+        c.run('sed -i "s/{{openfortivpn_user}}/' + config['openfortivpn_user'] + '/g" etc_init_d_openfortivpn.template', echo=True)
+        c.run('sed -i "s/{{openfortivpn_password}}/' + config['openfortivpn_password'] + '/g" etc_init_d_openfortivpn.template', echo=True)
+        c.run('sed -i "s/{{openfortivpn_trusted_cert}}/' + config['openfortivpn_trusted_cert'] + '/g" etc_init_d_openfortivpn.template', echo=True)
+        c.run('sudo cp -rv ./etc_init_d_openfortivpn.template /etc/init.d/openfortivpn')
+        c.run('sudo chmod 755 /etc/init.d/openfortivpn')
+        c.run('sudo update-rc.d openfortivpn defaults')
+
 
     # Install sqlclient
     logger.info("Creating folder")
+    if c.run('test -d {}'.format('oracle_download'), warn=True).failed:
+        pass
+    else:
+        logger.info("Creating folder")
+        c.run('sudo rm -r oracle_download', echo=True)    
     c.run('sudo rm -r oracle_download')        
     c.run('mkdir oracle_download')
-
-    # Download
     with c.cd('oracle_download'):
         c.run('sudo apt install -y unzip libaio1 alien', echo=True)
         c.run('wget https://download.oracle.com/otn_software/linux/instantclient/19600/oracle-instantclient19.6-basic-19.6.0.0.0-1.x86_64.rpm', echo=True)
@@ -145,7 +165,30 @@ def provision(c):
         c.run('sudo alien -v oracle-instantclient19.6-sqlplus-19.6.0.0.0-1.x86_64.rpm --scripts', echo=True)
         c.run('sudo dpkg -i oracle-instantclient19.6-sqlplus_19.6.0.0.0-2_amd64.deb', echo=True)
 
-    # Generate service
+
+    print_end_banner()
+
+@task(hosts=my_hosts)
+def connectVpn(c):
+    """
+    Testing task
+    """
+    print_init_banner('Testing task')
+
+    # Update System
+    c.run('sudo service openfortivpn restart', echo=True)
+
+    print_end_banner()
+
+@task(hosts=my_hosts)
+def disconnectVpn(c):
+    """
+    Testing task
+    """
+    print_init_banner('Testing task')
+
+    # Update System
+    c.run('sudo service openfortivpn stop', echo=True)
 
     print_end_banner()
 
