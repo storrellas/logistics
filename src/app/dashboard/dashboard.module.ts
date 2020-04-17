@@ -1,15 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { CommonModule } from '@angular/common';
 
 // Declarations
-import { AppComponent } from './app.component';
+import { DashboardComponent } from './dashboard.component';
 
 // Imports - Other
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,29 +16,31 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-// Imports - Project
-import { DashboardModule } from './dashboard/dashboard.module';
-
 // Providers
 import { MatDialog } from '@angular/material/dialog';
-import { ModalComponent } from './modal/modal.component';
+import { ModalComponent } from '../modal/modal.component';
 
-
-
-
-@NgModule({ 
+@NgModule({
   declarations: [
-    AppComponent
+    DashboardComponent,
+    ModalComponent
   ],
   imports: [
-    NgbModule,
-    BrowserModule,
-    AppRoutingModule,
-
-    // Project imports
-    DashboardModule
-    
+    CommonModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule, 
+    FontAwesomeModule,
+    FormsModule,
   ],
-  bootstrap: [AppComponent]
+  exports: [DashboardComponent, ModalComponent],
+
+  providers: [MatDialog],
+
 })
-export class AppModule { }
+export class DashboardModule { }
