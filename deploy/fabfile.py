@@ -50,15 +50,8 @@ print(json.dumps(config, indent=2))
 print_end_banner(" ")
 
 # Select docker folder
-docker_folder = ''
-if config['version'] == 'dev':
-    docker_folder = './docker_dev'
-    print_init_banner('DOCKER DEV SELECTED')
-    print_end_banner()
-elif config['version'] == 'pro':
-    docker_folder = './docker_pro'
-    print_init_banner('DOCKER PRO SELECTED')
-    print_end_banner()
+docker_folder = './docker'
+
 
 
 @task(hosts=my_hosts)
@@ -111,7 +104,7 @@ def provision(c):
 
     # Install docker-compose
     c.run('sudo curl -L \
-            \"https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)\" \
+            "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" \
             -o /usr/local/bin/docker-compose', echo=True)
     c.run('sudo chmod +x /usr/local/bin/docker-compose', echo=True)
     c.run('docker-compose --version', echo=True)
@@ -187,35 +180,35 @@ def disconnectVpn(c):
 
     print_end_banner()
 
-# @task(hosts=my_hosts)
-# def gitSSH(c):
-#     """
-#     Uploads GIT key to clone
-#     """
-#     print_init_banner('gitSSH: Uploads keys to download repo')
+@task(hosts=my_hosts)
+def gitSSH(c):
+    """
+    Uploads GIT key to clone
+    """
+    print_init_banner('gitSSH: Uploads keys to download repo')
 
-#     # # Generate RSA keys
-#     # keypath = '~/.ssh/stem'
-#     # created_rsa_key=False
-#     # if c.run('test -f {}'.format(keypath), warn=True).failed:
-#     #     c.run('echo y |ssh-keygen -q -t rsa -N "" -f ~/.ssh/stem', hide=True)
-#     #     created_rsa_key=True
-#     # else:
-#     #     logger.info("Key already exists")
-#     #
-#     # # Print public key value
-#     # output = c.run('cat ~/.ssh/stem.pub', hide=True)
-#     # logger.info("++++++++++++++++++++++++++++++")
-#     # logger.info("++ Generated RSA public key ++")
-#     # logger.info("++++++++++++++++++++++++++++++")
-#     # print(output.stdout)
+    # # Generate RSA keys
+    # keypath = '~/.ssh/stem'
+    # created_rsa_key=False
+    # if c.run('test -f {}'.format(keypath), warn=True).failed:
+    #     c.run('echo y |ssh-keygen -q -t rsa -N "" -f ~/.ssh/stem', hide=True)
+    #     created_rsa_key=True
+    # else:
+    #     logger.info("Key already exists")
+    #
+    # # Print public key value
+    # output = c.run('cat ~/.ssh/stem.pub', hide=True)
+    # logger.info("++++++++++++++++++++++++++++++")
+    # logger.info("++ Generated RSA public key ++")
+    # logger.info("++++++++++++++++++++++++++++++")
+    # print(output.stdout)
 
-#     # Upload keys
-#     logger.info("Upload RSA keys ...")
-#     # c.put('./deploy/rsa/stem_bitbucket', remote='./.ssh/id_rsa')
-#     # c.put('./deploy/rsa/stem_bitbucket.pub', remote='./.ssh/id_rsa.pub')
-#     c.put(config['git_key_public'], remote='./.ssh/id_rsa.pub')
-#     c.put(config['git_key_private'], remote='./.ssh/id_rsa')
+    # Upload keys
+    logger.info("Upload RSA keys ...")
+    # c.put('./deploy/rsa/stem_bitbucket', remote='./.ssh/id_rsa')
+    # c.put('./deploy/rsa/stem_bitbucket.pub', remote='./.ssh/id_rsa.pub')
+    c.put(config['git_key_public'], remote='./.ssh/id_rsa.pub')
+    c.put(config['git_key_private'], remote='./.ssh/id_rsa')
 
 
 
@@ -224,252 +217,138 @@ def disconnectVpn(c):
 #     c.run('sudo chmod 600 ./.ssh/id_rsa.pub')
 #     print_end_banner()
 
-# @task(hosts=my_hosts)
-# def nginxSelfsigned(c):
-#     """
-#     Generates SSH keys selfsigned, creates NGINX configuration and restart
-#     """
-#     print_init_banner('NGINX - selfsigned: Generates selfsigned certs and configures NGINX')
+@task(hosts=my_hosts)
+def nginxLetsencrypt(c):
+    """
+    Configure lest encrypt and update NGINX
+    """
+    #logger.error("This needs to be completed")
+    print_init_banner('NGINX - LetsEncrypt: Requires certs and configures NGINX')
 
-#     # Upload keys
-#     logger.info("Configure NGINX ...")
+    logger.info("Getting lets entcript certificates ...")
+    nginx_conf_name = 'nginx_conf'
+    nginx_conf_path = './' + nginx_conf_name
+    c.run('mkdir ' + nginx_conf_name, warn=True)
+    with c.cd(nginx_conf_path):
+        # Create LetsEncrypt certificate
+        c.run('sudo /etc/init.d/nginx stop', echo=True)
+        c.run('sudo certbot certonly --standalone -d ' + config['app_domain'] + ' --manual-public-ip-logging-ok --force-renewal', echo=True, warn=True)
 
-#     nginx_conf_name = 'nginx_conf'
-#     nginx_conf_path = './' + nginx_conf_name
-#     c.run('mkdir ' + nginx_conf_name, warn=True)
-#     with c.cd(nginx_conf_path):
-#         # Create selfsigned certificate
-#         c.run('openssl genrsa -out selfsigned.key 2048')
-#         c.run('openssl req -new -x509 -key selfsigned.key -out selfsigned.cert -days 3650 -subj /CN=www.example.com')
-#         c.run('sudo cp -rv selfsigned.* /etc/nginx/')
+        # Generate configuration
+        c.put('./nginx_conf.template', remote=nginx_conf_path)
+        c.run('sed -i "s/{{ssl_cert}}/\/etc\/letsencrypt\/live\/' + config['app_domain'] +  '\/fullchain.pem/g" nginx_conf.template', echo=True)
+        c.run('sed -i "s/{{ssl_key}}/\/etc\/letsencrypt\/live\/' + config['app_domain'] + '\/privkey.pem/g" nginx_conf.template', echo=True)
+        c.run('sed -i "s/{{domain}}/' + config['app_domain'] + '/g" nginx_conf.template', echo=True)
 
-#         # Generate configuration
-#         c.put('./nginx_conf.template', remote=nginx_conf_path)
-#         c.run('sed -i "s/{{ssl_cert}}/\/etc\/nginx\/selfsigned.cert/g" nginx_conf.template', echo=True)
-#         c.run('sed -i "s/{{ssl_key}}/\/etc\/nginx\/selfsigned.key/g" nginx_conf.template', echo=True)
-#         c.run('sed -i "s/{{domain}}/' + config['app_domain'] + '/g" nginx_conf.template', echo=True)
-
-#         # Set configuration
-#         c.run('sudo cp -rv ./nginx_conf.template /etc/nginx/sites-available/', echo=True)
-#         c.run('sudo ln -s /etc/nginx/sites-available/nginx_conf.template /etc/nginx/sites-enabled/nginx_conf.template', echo=True, warn=True)
+        # Set configuration
+        c.run('sudo cp -rv ./nginx_conf.template /etc/nginx/sites-available/' + config['app_domain'], echo=True)
+        c.run('sudo ln -s /etc/nginx/sites-available/' + config['app_domain'] + ' /etc/nginx/sites-enabled/' + config['app_domain'], echo=True, warn=True)
 
 
-#     logger.info("Restart NGINX ...")
-#     c.run('sudo /etc/init.d/nginx restart', echo=True)
-#     print_end_banner()
+    logger.info("Restart NGINX ...")
+    c.run('sudo /etc/init.d/nginx restart', echo=True)
+    print_end_banner()
 
-# @task(hosts=my_hosts)
-# def nginxLetsencrypt(c):
-#     """
-#     Configure lest encrypt and update NGINX
-#     """
-#     #logger.error("This needs to be completed")
-#     print_init_banner('NGINX - LetsEncrypt: Requires certs and configures NGINX')
+@task(hosts=my_hosts)
+def deploy(c):
+    """
+    Clones, Pull and launches docker-compose build
+    """
+    print_init_banner('Deploy: Clones, Pull and launches docker-compose build')
 
-#     logger.info("Getting lets entcript certificates ...")
-#     nginx_conf_name = 'nginx_conf'
-#     nginx_conf_path = './' + nginx_conf_name
-#     c.run('mkdir ' + nginx_conf_name, warn=True)
-#     with c.cd(nginx_conf_path):
-#         # Create LetsEncrypt certificate
-#         c.run('sudo /etc/init.d/nginx stop', echo=True)
-#         #c.run('sudo certbot certonly --standalone -d ' + config['app_domain'] + ' --manual-public-ip-logging-ok --force-renewal', echo=True, warn=True)
+    # Print public key value
+    logger.info('Using public RSA key')
+    output = c.run('cat ~/.ssh/id_rsa.pub', hide=True)
+    print(output.stdout)
 
-#         # Generate configuration
-#         c.put('./nginx_conf.template', remote=nginx_conf_path)
-#         c.run('sed -i "s/{{ssl_cert}}/\/etc\/letsencrypt\/live\/' + config['app_domain'] +  '\/fullchain.pem/g" nginx_conf.template', echo=True)
-#         c.run('sed -i "s/{{ssl_key}}/\/etc\/letsencrypt\/live\/' + config['app_domain'] + '\/privkey.pem/g" nginx_conf.template', echo=True)
-#         c.run('sed -i "s/{{domain}}/' + config['app_domain'] + '/g" nginx_conf.template', echo=True)
+    # proceeding to deployment
+    logger.info('Deploying to folder ' + config['remote_workspace'])
+    if c.run('test -d {}'.format(config['remote_workspace']), warn=True).failed:
+        logger.info("Creating folder")
+        c.run('mkdir ' + config['remote_workspace'])
 
-#         # Set configuration
-#         c.run('sudo cp -rv ./nginx_conf.template /etc/nginx/sites-available/' + config['app_domain'], echo=True)
-#         c.run('sudo ln -s /etc/nginx/sites-available/' + config['app_domain'] + ' /etc/nginx/sites-enabled/' + config['app_domain'], echo=True, warn=True)
+    with c.cd(config['remote_workspace']):
 
+        # Get repo folder from URL
+        repo_folder = get_repo_folder(config['repository'])
 
-#     logger.info("Restart NGINX ...")
-#     c.run('sudo /etc/init.d/nginx restart', echo=True)
-#     print_end_banner()
+        # Cloning repository
+        logger.info('Cloning repository ... ')
+        if c.run('test -d {}'.format(repo_folder), warn=True).failed:
+            c.run('echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config')
+            c.run('git clone ' + config['repository'], echo=True, pty=True)
+        else:
+            logger.info('Repository exists skipping')
 
-# @task(hosts=my_hosts)
-# def deploy(c):
-#     """
-#     Clones, Pull and launches docker-compose build
-#     """
-#     print_init_banner('Deploy: Clones, Pull and launches docker-compose build')
+        # Get latest changes
+        logger.info('Get latest changes ... ')
+        with c.cd(repo_folder):
 
-#     # Print public key value
-#     logger.info('Using public RSA key')
-#     output = c.run('cat ~/.ssh/id_rsa.pub', hide=True)
-#     print(output.stdout)
+            # Fetch all branches
+            c.run('git fetch --all ', echo=True, pty=True)
 
-#     # proceeding to deployment
-#     logger.info('Deploying to folder ' + config['remote_workspace'])
-#     if c.run('test -d {}'.format(config['remote_workspace']), warn=True).failed:
-#         logger.info("Creating folder")
-#         c.run('mkdir ' + config['remote_workspace'])
+            # Get specific branch
+            branch = 'master'
+            if  config['branch'] is not None:
+                branch = config['branch']
 
-#     with c.cd(config['remote_workspace']):
+            # Checking whether pull is necessary
+            output1 = c.run('git rev-parse {}'.format(branch), echo=True, warn=True)
+            output2 = c.run('git rev-parse origin/{}'.format(branch), echo=True)
+            # if output1.failed == False and output1.stdout == output2.stdout:
+            #     print_end_banner("No changes detected. Aborting. Hash={}".format(output1.stdout))
+            #     return
 
-#         # Get repo folder from URL
-#         repo_folder = get_repo_folder(config['repository'])
+            # Perform pull
+            c.run('git checkout {}'.format(branch), echo=True, pty=True)
+            c.run('git pull origin {}'.format(branch), echo=True, pty=True)
 
-#         # Cloning repository
-#         logger.info('Cloning repository ... ')
-#         if c.run('test -d {}'.format(repo_folder), warn=True).failed:
-#             c.run('echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config')
-#             c.run('git clone ' + config['repository'], echo=True, pty=True)
-#         else:
-#             logger.info('Repository exists skipping')
+            if c.run('test -f {}'.format(docker_folder + '/.env'), warn=True).failed:
+                c.run('cp -rv ' + docker_folder + '/.env.template ' + docker_folder + '/.env', echo=True)
 
-#         # Get latest changes
-#         logger.info('Get latest changes ... ')
-#         with c.cd(repo_folder):
+        # Generate docker image
+        print_init_banner('Docker image ... ')
+        with c.cd(repo_folder + '/' + docker_folder):
+            c.run('sudo docker-compose down', echo=True)
+            c.run('sudo docker-compose build', echo=True)
 
-#             # Fetch all branches
-#             c.run('git fetch --all ', echo=True, pty=True)
+    print_end_banner()
 
-#             # Get specific branch
-#             branch = 'master'
-#             if  config['branch'] is not None:
-#                 branch = config['branch']
-
-#             # Checking whether pull is necessary
-#             output1 = c.run('git rev-parse {}'.format(branch), echo=True, warn=True)
-#             output2 = c.run('git rev-parse origin/{}'.format(branch), echo=True)
-#             # if output1.failed == False and output1.stdout == output2.stdout:
-#             #     print_end_banner("No changes detected. Aborting. Hash={}".format(output1.stdout))
-#             #     return
-
-#             # Perform pull
-#             c.run('git checkout {}'.format(branch), echo=True, pty=True)
-#             c.run('git pull origin {}'.format(branch), echo=True, pty=True)
-
-#             if c.run('test -f {}'.format(docker_folder + '/.env'), warn=True).failed:
-#                 c.run('cp -rv ' + docker_folder + '/.env.template ' + docker_folder + '/.env', echo=True)
-
-#         # Generate docker image
-#         print_init_banner('Docker image ... ')
-#         with c.cd(repo_folder + '/' + docker_folder):
-#             c.run('sudo docker-compose down', echo=True)
-#             c.run('sudo docker-compose build', echo=True)
-
-#         # Copy cron file
-#         with c.cd(repo_folder):
-#             c.run('sudo cp -rv deploy/cleaninactiveusers.sh /etc/cron.hourly/cleaninactiveusers', echo=True)
-
-#     print_end_banner()
-
-#     # Relaunch docker
-#     launch(c)
-
-# def migrate_db(c):
-
-#     # Get repo folder from URL
-#     repo_folder = get_repo_folder(config['repository'])
-#     with c.cd(config['remote_workspace'] + '/' + repo_folder + '/' + docker_folder):
-#         #output = c.run('sudo docker-compose ps -q tryasport_api', echo=True)
-#         #container_id = output.stdout
-#         #c.run('sudo docker exec ' + container_id + ' python3 manage.py makemigrations', echo=True)
-
-#         # Stop services
-#         c.run('sudo docker-compose down', echo=True)
-
-#         # Delete current DB
-#         #c.run('sudo rm -rf /home/ubuntu/persistance/', echo=True)
-
-#         # Start services
-#         c.run('sudo docker-compose up -d --force-recreate tryasport_db ', echo=True)
-
-#         # Give some time to start up db
-#         logger.info('Give 15sec to start up db ...')
-#         time.sleep(15)   # Delays for 3 seconds until db is up
-
-#         # DB Migrations
-#         if aws_stag in my_hosts:
-#             logger.info("STAG configuration selected ...")
-#             command = 'bash -x db.sh --stag'
-#         elif aws_pro in my_hosts:
-#             logger.info("PRO configuration selected ...")
-#             command = 'bash -x db.sh --pro'
-#         else:
-#             logger.info("Defaulting to PRO configuration ...")
-#             command = 'bash -x db.sh'
-#         #c.run('sudo docker-compose exec tryasport_api ' + command, echo=True, pty=True)
-#         c.run('sudo docker-compose run --rm tryasport_api ' + command, echo=True, pty=True)
-
-#         # Update URLs if staging
-#         if aws_stag in my_hosts:
-#             logger.info("STAG configuration selected ...")
-#             command = 'python3 manage.py updateurl'
-#             c.run('sudo docker-compose run --rm tryasport_api ' + command, echo=True, pty=True)
+    # Relaunch docker
+    launch(c)
 
 
-#         # Stop services
-#         c.run('sudo docker-compose down', echo=True)
+@task(hosts=my_hosts)
+def launch(c):
+    """
+    Relaunches docker
+    """
+    print_init_banner('Relaunches docker')
 
-# @task(hosts=my_hosts)
-# def wipedb(c):
-#     """
-#     Wipes DB and installs fixtures
-#     """
-#     print_init_banner('WIPE_DB: Wipes DB and installs fixtures')
+    # Get repo folder from URL
+    repo_folder = get_repo_folder(config['repository'])
 
-#     # Get repo folder from URL
-#     repo_folder = get_repo_folder(config['repository'])
-#     # Delete current DB
-#     with c.cd(config['remote_workspace'] + '/' + repo_folder + '/' + docker_folder):
-#         c.run('sudo rm -rf /home/ubuntu/persistance/', echo=True)
+    logger.info('Docker image ... ')
+    with c.cd(config['remote_workspace'] + '/' + repo_folder + '/' + docker_folder):
+        c.run('sudo docker-compose down', echo=True)
+        c.run('sudo docker-compose up -d', echo=True)
 
+    print_end_banner()
 
-#     # Migrate DB 
-#     migrate_db(c)
+@task(hosts=my_hosts)
+def halt(c):
+    """
+    halt docker
+    """
+    print_init_banner('Stop docker')
 
-#     print_end_banner()
+    # Get repo folder from URL
+    repo_folder = get_repo_folder(config['repository'])
 
-# @task(hosts=my_hosts)
-# def db(c):
-#     """
-#     Migrates DB and installs fixtures
-#     """
-#     print_init_banner('DB: Migrates DB and installs fixtures')
+    with c.cd(config['remote_workspace'] + '/' + repo_folder + '/docker'):
+        c.run('sudo docker-compose down', echo=True)
 
-
-#     # Migrate DB 
-#     migrate_db(c)
-
-#     print_end_banner()
-
-# @task(hosts=my_hosts)
-# def launch(c):
-#     """
-#     Relaunches docker
-#     """
-#     print_init_banner('Relaunches docker')
-
-#     # Get repo folder from URL
-#     repo_folder = get_repo_folder(config['repository'])
-
-#     logger.info('Docker image ... ')
-#     with c.cd(config['remote_workspace'] + '/' + repo_folder + '/' + docker_folder):
-#         c.run('sudo docker-compose down', echo=True)
-#         c.run('sudo docker-compose up -d', echo=True)
-
-#     print_end_banner()
-
-# @task(hosts=my_hosts)
-# def halt(c):
-#     """
-#     halt docker
-#     """
-#     print_init_banner('Stop docker')
-
-#     # Get repo folder from URL
-#     repo_folder = get_repo_folder(config['repository'])
-
-#     with c.cd(config['remote_workspace'] + '/' + repo_folder + '/docker'):
-#         c.run('sudo docker-compose down', echo=True)
-
-#     print_end_banner()
+    print_end_banner()
 
 
 # @task(hosts=my_hosts)
