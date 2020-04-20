@@ -51,4 +51,4 @@ tutorial.txt
 # Python venv
 /deploy/venv
 /deploy/*.json
-*.env/
+*.env
