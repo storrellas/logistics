@@ -84,10 +84,6 @@ def provision(c):
     logger.info("Installing Dependencies ... ")
     c.run('sudo apt update', echo=True)
 
-    # Update System
-    logger.info("Installing Dependencies ... ")
-    c.run('sudo apt update', echo=True)
-
     # Remove former
     c.run('sudo apt-get remove docker docker-engine docker.io containerd runc', echo=True)
 
@@ -96,7 +92,6 @@ def provision(c):
 
     # Add GPG key
     c.run('sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -', echo=True)
-
 
     # Verify
     output = c.run('sudo apt-key fingerprint 0EBFCD88', echo=True)
