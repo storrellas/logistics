@@ -14,7 +14,15 @@ export class BaseComponent implements OnInit {
   faWrench = faWrench;
   faGraduationCap = faGraduationCap;
 
-  constructor(public dialog: MatDialog) { }
+  user: string; 
+  company: string;
+  session_init: string;
+
+  constructor(public dialog: MatDialog) { 
+    this.user = "MyUser";
+    this.company = "MyCompany";
+    this.session_init = "12/03/20 08:38";
+  }
 
   ngOnInit(): void {
   }
@@ -33,6 +41,6 @@ export class BaseComponent implements OnInit {
 
   onClickMe() {
     console.log("Taking my time")
-  }
+  } 
 
 }
