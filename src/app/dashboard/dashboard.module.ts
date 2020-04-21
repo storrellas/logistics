@@ -19,12 +19,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // Providers
 import { MatDialog } from '@angular/material/dialog';
+import { BaseComponent } from './base/base.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    ModalComponent
+    ModalComponent,
+    BaseComponent
   ],
   imports: [
     CommonModule,
