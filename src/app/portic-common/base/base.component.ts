@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
-  selector: 'app-base',
+  selector: 'portic-base',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.scss']
 })
@@ -44,3 +44,5 @@ export class BaseComponent implements OnInit {
   } 
 
 }
+
+

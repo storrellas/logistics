@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(event: MouseEvent){
     // Fake redirection
-    this.router.navigate(['/dashboard']) 
+    this.router.navigate(['/lista']) 
   }
 
 }

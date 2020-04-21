@@ -40,3 +40,5 @@ import { MatDialog } from '@angular/material/dialog';
   providers: [MatDialog],
 })
 export class PorticCommonModule { }
+
+export { BaseComponent };
