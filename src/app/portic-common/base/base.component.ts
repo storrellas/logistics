@@ -43,6 +43,6 @@ export class BaseComponent implements OnInit {
     console.log("Taking my time")
   }  
 
-}
+} 
 
 
