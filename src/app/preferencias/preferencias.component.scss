@@ -1,16 +1,33 @@
+@import "styles";
+@import "variables";
+
 .tab {
   // background: yellow;
-  color: green;
+  color: $font-color;
+  @include portic-bold-mixin;
   .content{
     height: 70vh;
-    border: 1px solid #dee2e6;
+    border: 1px solid $border;
     border-top-width: 0px;
+    background-color: $tab-background;
+  }
+
+  .nav-tabs{
+    border-color: white white $border white;
   }
 
   .nav-link.active {
-    color: green;
+    color: $font-color;
+    border-color: $border $border white;
+    background: $tab-background;
   }
   .nav-link{
-    color: green;
+    color: $font-color;
+    &:hover{
+      color: $font-color;
+      border-color: $border $border white $border;
+      background: $tab-background;
+    }
   }
+  
 }
