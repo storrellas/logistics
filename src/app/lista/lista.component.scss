@@ -1,14 +1,10 @@
-@import "../../styles";
+@import "styles";
+@import "variables";
 
-
-$btn-background: purple;
-$btn-hover: #922492;
-$btn-active: #6D006D;
-$btn-font: white;
 
 /* Filtering */
 .filtering {
-  background: #c68cc6; 
+  background: $background; 
   display: flex; 
   align-items: center;
   font-size: 0.8rem;
@@ -40,26 +36,26 @@ $btn-font: white;
 
 /* Tool */
 .doc-tool{
-  border: 1px solid purple; 
+  border: 1px solid $border; 
   padding: 0.3em; 
   display: flex; 
   justify-content: space-between;
 
-  .btn{
+  .tool{
     font-size: 0.8rem;
     border: 0px; 
     border-radius: 5px; 
-    color: purple;
+    color: $font-color;
     padding: 0.7em 1em 0.7em 1em;
     outline: none;
     box-shadow: none;  
     @include portic-bold-mixin;
     &:hover{
-      background: #ECDAEC;    
+      background: $tool-background-hover;    
     }
     &:active{
       color: white;
-      background: #A978A9;      
+      background: $tool-background-active;      
     }
   }
   .disabled{
@@ -82,30 +78,31 @@ $btn-font: white;
     border-collapse: separate;
     text-align: center;
     font-size: 12px;
-    border: 1px solid purple;
+    border: 1px solid $border;
 
     .title{
-      color: purple;
-      font-weight: bold; 
-      background: #c68cc6;
+      color: $font-color;
+      @include portic-bold-mixin;
+      background: $table-header-background;
       /*#800080,#922492,#A448A4,#B66DB6,#C891C8,#DAB6DA,#ECDAEC*/      
       th {
-        border: 1px solid purple;
+        border: 1px solid $border;
+        @include portic-bold-mixin;        
       }
     }
 
     .body{
       color: black; 
       td {
-        border-left: 1px solid purple;
-        border-right: 1px solid purple;
+        border-left: 1px solid $border;
+        border-right: 1px solid $border;
         height: 22px;
       }
     }
 
     // Apply colors to rows
     tr:nth-child(even){
-      background: #ECDAEC;
+      background: $table-data-background;
     }
   }
 }

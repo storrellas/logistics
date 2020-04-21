@@ -31,6 +31,12 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src",
+                "src/styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -129,6 +135,6 @@
   },
   "defaultProject": "porticFront-porticApp",
   "cli": {
-    "analytics": "2cbaf70f-dbc4-4924-adde-9a5d9f7a258b"
+    "analytics": false
   }
 }

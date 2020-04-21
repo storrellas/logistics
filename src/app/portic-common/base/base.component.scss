@@ -1,3 +1,6 @@
+@import "styles";
+@import "variables";
+
 /* Toolbar */
 .toolbar {
   height: 3em; 
@@ -21,15 +24,15 @@
       min-width: unset!important;
       margin-right: 5px; 
       border: 0px;
-      color: purple;
+      color: $font-color;
       &:hover{
-        background: #ECDAEC;
+        background: $tool-background-hover;
       }
     }
     .container{
       padding-left: 10px;
       padding-right: 10px;
-      border-right: 1px solid purple;
+      border-right: 1px solid $border;
       text-align: center;
     }
     .no-border{
