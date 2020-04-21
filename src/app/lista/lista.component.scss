@@ -1,6 +1,11 @@
 @import "../../styles";
 
 
+$btn-background: purple;
+$btn-hover: #922492;
+$btn-active: #6D006D;
+$btn-font: white;
+
 /* Filtering */
 .filtering {
   background: #c68cc6; 
@@ -16,17 +21,17 @@
     font-size: 0.8rem;
     border: 0px; 
     border-radius: 5px; 
-    color: white;
+    color: $btn-font;
     padding: 0.7em 1em 0.7em 1em;
-    background: purple;
+    background: $btn-background;
     @include portic-bold-mixin;
     outline: none;
     box-shadow: none;    
     &:hover{
-      background: #922492;  
+      background: $btn-hover;  
     }
     &:active{
-      background: #6D006D;
+      background: $btn-active;
     }
   }
 }

@@ -1,3 +1,60 @@
 <portic-base>
-  <p>preferencias works!</p>
+  <div class="tab">
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>Terminales</a>
+          <ng-template ngbNavContent>
+            <div class="content">
+              <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
+                master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
+                keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat
+                salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+            </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="2">
+          <a ngbNavLink>Consignatarios</a>
+          <ng-template ngbNavContent>
+              <div class="content">
+                  <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
+                    master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
+                    keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat
+                    salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+              </div>
+          </ng-template>
+        </li>
+        <li [ngbNavItem]="3">
+          <a ngbNavLink>Líneas Marítimas</a>
+          <ng-template ngbNavContent>
+              <div class="content">
+                  <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
+                    master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
+                    keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat
+                    salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+              </div>
+          </ng-template>
+          </li>
+          <li [ngbNavItem]="4">
+            <a ngbNavLink>Marcas Rodados</a>
+            <ng-template ngbNavContent>
+                <div class="content">
+                    <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
+                      master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
+                      keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat
+                      salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+                </div>
+            </ng-template>
+          </li>
+      </ul>        
+      <div [ngbNavOutlet]="nav"></div>
+  </div>
 </portic-base>
+
+
+
+
+
+
+
+  
+

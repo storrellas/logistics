@@ -1,0 +1,16 @@
+.tab {
+  // background: yellow;
+  color: green;
+  .content{
+    height: 70vh;
+    border: 1px solid #dee2e6;
+    border-top-width: 0px;
+  }
+
+  .nav-link.active {
+    color: green;
+  }
+  .nav-link{
+    color: green;
+  }
+}
