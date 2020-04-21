@@ -1,11 +1,9 @@
-
-
 <div class="w-100 toolbar"> 
   
   <div> PORTIC LOGO </div>
-  <div> <b>Usuario:</b> {{user}}</div>
-  <div> <b>Empresa:</b> {{company}}</div>
-  <div> <b>Inicio Sesión:</b>{{session_init}}</div>
+  <div> <span class="portic-bold">Usuario:</span> {{user}}</div>
+  <div> <span class="portic-bold">Empresa:</span> {{company}}</div>
+  <div> <span class="portic-bold">Inicio Sesión:</span>{{session_init}}</div>
 
   <div style="display: flex; justify-content: space-between">
 
@@ -22,9 +20,9 @@
   </div>
 </div>
 
-<div style="padding: 10px" class="main-menu">
+<div class="container-fluid main-menu">
 
-  <div class="w-100 mt-3" style="display: flex">
+  <div class="w-100 mt-3 tool-set">
     <div class="container">
       <a mat-stroked-button routerLink="." class="button">Lista de Documentos</a>
     </div>
@@ -36,7 +34,7 @@
       <a mat-stroked-button routerLink="." class="button">Nueva Lista de Descarga</a>
     </div>
 
-    <div class="container" style="border: 0px">
+    <div class="container no-border">
       <a mat-stroked-button routerLink="." class="button">Preferencias</a>
     </div>
   </div>

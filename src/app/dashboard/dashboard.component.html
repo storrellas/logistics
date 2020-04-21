@@ -1,37 +1,27 @@
 <app-base>
 
-  <div class="w-100 mt-3" style="padding: 1em; background: #c68cc6; display: flex; align-items: center">
+  <div class="w-100 mt-3 p-3 filtering">
       <div class="row">
           <div class="col">
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+            <select class="form-control">
+                <option *ngFor="let filter_type of filter_type_list">{{filter_type}}</option>
             </select>
           </div>
           <div class="col">
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-          </div>
-  
-      
-          <div class="col">
-              <select class="form-control" id="exampleFormControlSelect1">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
+            <input type="text" class="form-control" placeholder="">
           </div>
           <div class="col">
-              <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+              <select class="form-control">
+                <option *ngFor="let filter_type of filter_type_list">{{filter_type}}</option>
+              </select>
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="">
           </div>
   
-          <div class="col" style="display: flex; align-content: center">
+          <div class="col container">
             <label for="exampleFormControlSelect1">Circuito</label>
-            <select class="form-control" id="exampleFormControlSelect1">
+            <select class="form-control">
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -40,9 +30,9 @@
             </select>
           </div>
   
-          <div class="col" style="display: flex; align-content: center">
+          <div class="col container">
               <label for="exampleFormControlSelect1">Estado</label>
-              <select class="form-control" id="exampleFormControlSelect1">
+              <select class="form-control">
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -50,9 +40,9 @@
                 <option>5</option>
               </select>
             </div>
-            <div class="col" style="display: flex; align-content: center">
+            <div class="col container">
                 <label for="exampleFormControlSelect1">Desde</label>
-                <select class="form-control" id="exampleFormControlSelect1">
+                <select class="form-control">
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
@@ -60,8 +50,8 @@
                   <option>5</option>
                 </select>
               </div>
-            <div class="col" style="display: flex; align-content: center">
-              <button type="button" class="filtering-btn">Buscar</button>
+            <div class="col container">
+              <button type="button" class="btn">Buscar</button>
             </div>
       </div>  
   
@@ -78,155 +68,6 @@
     <button type="button" class="btn">Ver</button>
     <button type="button" class="btn">Enviar</button>
     <button type="button" class="btn">Enviar a resguardo</button>
-</div>
-
-
-<div class="w-100 mt-3 doc-list">
-    <table class="w-100 doc-table">
-      <tr class="title">
-        <th *ngFor="let header of table_header">{{header}}</th>
-      </tr>
-      <tr *ngFor="let data of table_data" class="body">
-          <td>{{data.ship}}</td>
-          <td>{{data.arrival}}</td>
-          <td>{{data.departure}}</td>
-          <td>{{data.doc_type}}</td>
-          <td>{{data.cargo_type}}</td>
-          <td>{{data.emiter}}</td>
-          <td>{{data.receiver}}</td>
-          <td>{{data.status}}</td>
-          <td>{{data.date}}</td>
-          <td>{{data.id}}</td>
-          <td>{{data.version}}</td>
-          <td>{{data.user}}</td>
-          <td>{{data.receipt_status}}</td>
-      </tr>
-    </table>
-</div>
-
-</app-base>
-<!-- 
-
-<div class="w-100 toolbar"> 
-  
-  <div> PORTIC LOGO </div>
-  <div> <b>Usuario:</b> {{user}}</div>
-  <div> <b>Empresa:</b> {{company}}</div>
-  <div> <b>Inicio Sesión:</b>{{session_init}}</div>
-
-  <div style="display: flex; justify-content: space-between">
-
-    <button mat-button (click)="onClickMe()" class="toolbar-button">
-      <fa-icon [icon]="faExclamation" (click)="onClickMe()"></fa-icon>
-    </button>    
-    <button mat-button (click)="onClickMe()" class="toolbar-button">
-      <fa-icon [icon]="faWrench" (click)="onClickMe()"></fa-icon>
-    </button>
-    <button mat-button (click)="openDialog()" class="toolbar-button">
-      <fa-icon [icon]="faGraduationCap" (click)="onClickMe()"></fa-icon>
-    </button>
-
-  </div>
-</div>
-
-<div style="padding: 10px" class="main-menu">
-
-  <div class="w-100 mt-3" style="display: flex">
-    <div class="container">
-      <a mat-stroked-button routerLink="." class="button">Lista de Documentos</a>
-    </div>
-    <div class="container">
-      <a mat-stroked-button routerLink="." class="button">Nueva Lista de Carga</a>
-    </div>
-    
-    <div class="container">
-      <a mat-stroked-button routerLink="." class="button">Nueva Lista de Descarga</a>
-    </div>
-
-    <div class="container" style="border: 0px">
-      <a mat-stroked-button routerLink="." class="button">Preferencias</a>
-    </div>
-  </div>
-
-
-  <div class="w-100 mt-3" style="padding: 1em; background: #c68cc6; display: flex; align-items: center">
-    <div class="row">
-        <div class="col">
-          <select class="form-control" id="exampleFormControlSelect1">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-          </select>
-        </div>
-        <div class="col">
-          <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-        </div>
-
-    
-        <div class="col">
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-        </div>
-
-        <div class="col" style="display: flex; align-content: center">
-          <label for="exampleFormControlSelect1">Circuito</label>
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-
-        <div class="col" style="display: flex; align-content: center">
-            <label for="exampleFormControlSelect1">Estado</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-          <div class="col" style="display: flex; align-content: center">
-              <label for="exampleFormControlSelect1">Desde</label>
-              <select class="form-control" id="exampleFormControlSelect1">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            </div>
-          <div class="col" style="display: flex; align-content: center">
-            <button type="button" class="filtering-btn">Buscar</button>
-          </div>
-    </div>  
-
-
-  </div>
-
-  <div class="doc-tool w-100 mt-3">
-      <button type="button" class="btn disabled">DUAs</button>
-      <button type="button" class="btn">Fusionar</button>
-      <button type="button" class="btn">Imprimir</button>
-      <button type="button" class="btn">Historico</button>
-      <button type="button" class="btn">Editar</button>
-      <button type="button" class="btn">Eliminar</button>
-      <button type="button" class="btn">Ver</button>
-      <button type="button" class="btn">Enviar</button>
-      <button type="button" class="btn">Enviar a resguardo</button>
   </div>
 
 
@@ -253,6 +94,5 @@
       </table>
   </div>
 
-</div>
+</app-base>
 
- -->

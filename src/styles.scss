@@ -6,3 +6,10 @@ body {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.portic-bold{
+  font-weight: 500;
+}
+@mixin portic-bold-mixin {
+  font-weight: 500;
+}

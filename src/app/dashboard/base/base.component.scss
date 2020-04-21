@@ -13,19 +13,25 @@
 
 /* Main Menu */
 .main-menu{
-  .button {
-    margin-right: 5px; 
-    border: 0px;
-    color: purple;
-    &:hover{
-      background: #ECDAEC;
+  .tool-set{
+    display: flex;
+    .button {
+      margin-right: 5px; 
+      border: 0px;
+      color: purple;
+      &:hover{
+        background: #ECDAEC;
+      }
     }
-  }
-  .container{
-    padding-left: 10px;
-    padding-right: 10px;
-    border-right: 1px solid purple;
-    text-align: center;
+    .container{
+      padding-left: 10px;
+      padding-right: 10px;
+      border-right: 1px solid purple;
+      text-align: center;
+    }
+    .no-border{
+      border: 0px;
+    }
   }
 }
 
