@@ -7,11 +7,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 // Import
-import { PorticCommonModule } from '../portic-common/portic-common.module'
+import { PorticCommonModule } from '../portic-common/portic-common.module';
+import { SelectorComponent } from './selector/selector.component'
 
 
 @NgModule({
-  declarations: [PreferenciasComponent],
+  declarations: [PreferenciasComponent, SelectorComponent],
   imports: [
     CommonModule,
     BrowserModule,
