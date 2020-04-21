@@ -1,0 +1,123 @@
+/* Toolbar */
+.toolbar {
+  height: 3em; 
+  background-color:purple; 
+  display:flex; 
+  color: white; 
+  align-items: center;
+  justify-content: space-between
+}
+.toolbar-button:hover {
+  border: 1px solid grey;
+}
+
+/* Main Menu */
+.main-menu{
+  .button {
+    margin-right: 5px; 
+    border: 0px;
+    color: purple;
+    &:hover{
+      background: #ECDAEC;
+    }
+  }
+  .container{
+    padding-left: 10px;
+    padding-right: 10px;
+    border-right: 1px solid purple;
+    text-align: center;
+  }
+}
+
+
+/* Filtering */
+.filtering-btn{
+  border: 0px; 
+  border-radius: 5px; 
+  color: white;
+  padding: 0.7em 1em 0.7em 1em;
+  background: purple;
+  font-weight: 500;
+  outline: none;
+  box-shadow: none;    
+  &:hover{
+    background: #922492;  
+  }
+  &:active{
+    background: #6D006D;
+  }
+}
+
+
+/* Tool */
+.doc-tool{
+  border: 1px solid purple; 
+  padding: 1em; 
+  display: flex; 
+  justify-content: space-between;
+
+  .btn{
+    border: 0px; 
+    border-radius: 5px; 
+    color: purple;
+    padding: 0.7em 1em 0.7em 1em;
+    outline: none;
+    box-shadow: none;  
+    font-weight: 500;   
+    &:hover{
+      background: #ECDAEC;    
+    }
+    &:active{
+      color: white;
+      background: #A978A9;      
+    }
+  }
+  .disabled{
+    color: grey;
+    background: transparent;
+    cursor: initial;
+    &:hover{
+      color: grey;
+      background: transparent;
+      cursor: initial;
+    }
+  }
+}
+
+
+/* Table */
+.doc-list{
+  .doc-table {
+    border-spacing: 0;
+    border-collapse: separate;
+    text-align: center;
+    font-size: 12px;
+    border: 1px solid purple;
+
+    .title{
+      color: purple;
+      font-weight: bold; 
+      background: #c68cc6;
+      /*#800080,#922492,#A448A4,#B66DB6,#C891C8,#DAB6DA,#ECDAEC*/      
+      th {
+        border: 1px solid purple;
+      }
+    }
+
+    .body{
+      color: black; 
+      td {
+        border-left: 1px solid purple;
+        border-right: 1px solid purple;
+        height: 22px;
+      }
+    }
+
+    // Apply colors to rows
+    tr:nth-child(even){
+      background: #ECDAEC;
+    }
+  }
+}
+
+

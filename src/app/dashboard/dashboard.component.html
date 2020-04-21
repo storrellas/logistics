@@ -1,111 +1,4 @@
-<style>
 
-
-/* Toolbar */
-.toolbar {
-  height: 3em; 
-  background-color:purple; 
-  display:flex; 
-  color: white; 
-  align-items: center;
-  justify-content: space-between
-}
-.toolbar-button:hover {
-  border: 1px solid grey;
-}
-
-/* Main Menu */
-.main-menu-button {
-  margin-right: 5px; 
-  border: 0px;
-  color: purple;
-}
-.main-menu-button:hover {
-  background: #ECDAEC;
-}
-.main-menu-container-button{
-  padding-left: 10px;
-  padding-right: 10px;
-  border-right: 1px solid purple;
-}
-
-/* Filtering */
-.filtering-btn{
-  border: 0px; 
-  border-radius: 5px; 
-  color: white;
-  padding: 0.7em 1em 0.7em 1em;
-  background: purple;
-  font-weight: 500;
-  outline: none;
-  box-shadow: none;    
-}
-
-.filtering-btn:hover{
-  background: #922492;
-}
-
-.filtering-btn:active{
-  background: #6D006D;
-}
-
-/* Tool */
-.doc-tool-btn{
-  border: 0px; 
-  border-radius: 5px; 
-  color: purple;
-  padding: 0.7em 1em 0.7em 1em;
-  outline: none;
-  box-shadow: none;  
-  font-weight: 500; 
-}
-
-.doc-tool-btn:hover{
-  background: #ECDAEC;
-}
-.doc-tool-btn:active{
-  color: white;
-  background: #A978A9;
-}
-.doc-tool-btn-disabled, .doc-tool-btn-disabled:hover{
-  color: grey;
-  background: transparent;
-  cursor: initial;
-}
-
-
-/* Table */
-.doc-table {
-  border-spacing: 0;
-  border-collapse: separate;
-  text-align: center;
-  font-size: 12px;
-  border: 1px solid purple;
-}
-.doc-table-title {
-  color: purple;
-  font-weight: bold; 
-  background: #c68cc6;
-  /*#800080,#922492,#A448A4,#B66DB6,#C891C8,#DAB6DA,#ECDAEC*/
-}
-.doc-table-title th{
-  border: 1px solid purple;
-}
-.doc-table-body{
-  color: black; 
-}
-.doc-table-body td{
-  border-left: 1px solid purple;
-  border-right: 1px solid purple;
-  height: 22px;
-}
-.doc-table tr:nth-child(even){
-  background: #ECDAEC;
-}
-
-
-
-</style>
 
 <div class="w-100 toolbar"> 
   
@@ -129,22 +22,22 @@
   </div>
 </div>
 
-<div style="padding: 10px">
+<div style="padding: 10px" class="main-menu">
 
   <div class="w-100 mt-3" style="display: flex">
-    <div class="main-menu-container-button">
-      <a mat-stroked-button routerLink="." class="main-menu-button">Lista de Documentos</a>
+    <div class="container">
+      <a mat-stroked-button routerLink="." class="button">Lista de Documentos</a>
     </div>
-    <div class="main-menu-container-button">
-      <a mat-stroked-button routerLink="." class="main-menu-button">Nueva Lista de Carga</a>
+    <div class="container">
+      <a mat-stroked-button routerLink="." class="button">Nueva Lista de Carga</a>
     </div>
     
-    <div class="main-menu-container-button">
-      <a mat-stroked-button routerLink="." class="main-menu-button">Nueva Lista de Descarga</a>
+    <div class="container">
+      <a mat-stroked-button routerLink="." class="button">Nueva Lista de Descarga</a>
     </div>
 
-    <div class="main-menu-container-button" style="border: 0px">
-      <a mat-stroked-button routerLink="." class="main-menu-button">Preferencias</a>
+    <div class="container" style="border: 0px">
+      <a mat-stroked-button routerLink="." class="button">Preferencias</a>
     </div>
   </div>
 
@@ -217,26 +110,25 @@
 
   </div>
 
-  <div class="w-100 mt-3" style="border: 1px solid purple; padding: 1em; display: flex; justify-content: space-between">
-      <button type="button" class="doc-tool-btn doc-tool-btn-disabled">DUAs</button>
-      <button type="button" class="doc-tool-btn">Fusionar</button>
-      <button type="button" class="doc-tool-btn">Imprimir</button>
-      <button type="button" class="doc-tool-btn">Historico</button>
-      <button type="button" class="doc-tool-btn">Editar</button>
-      <button type="button" class="doc-tool-btn">Eliminar</button>
-      <button type="button" class="doc-tool-btn">Ver</button>
-      <button type="button" class="doc-tool-btn">Enviar</button>
-      <button type="button" class="doc-tool-btn">Enviar a resguardo</button>
-
+  <div class="doc-tool w-100 mt-3">
+      <button type="button" class="btn disabled">DUAs</button>
+      <button type="button" class="btn">Fusionar</button>
+      <button type="button" class="btn">Imprimir</button>
+      <button type="button" class="btn">Historico</button>
+      <button type="button" class="btn">Editar</button>
+      <button type="button" class="btn">Eliminar</button>
+      <button type="button" class="btn">Ver</button>
+      <button type="button" class="btn">Enviar</button>
+      <button type="button" class="btn">Enviar a resguardo</button>
   </div>
 
 
-  <div class="w-100 mt-3">
-      <table class="doc-table w-100">
-        <tr class="doc-table-title">
+  <div class="w-100 mt-3 doc-list">
+      <table class="w-100 doc-table">
+        <tr class="title">
           <th *ngFor="let header of table_header">{{header}}</th>
         </tr>
-        <tr *ngFor="let data of table_data" class="doc-table-body">
+        <tr *ngFor="let data of table_data" class="body">
             <td>{{data.ship}}</td>
             <td>{{data.arrival}}</td>
             <td>{{data.departure}}</td>
