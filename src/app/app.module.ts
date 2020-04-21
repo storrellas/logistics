@@ -24,7 +24,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     NgbModule,
     BrowserModule,
     AppRoutingModule,
-
+    
     // Project imports
     DashboardModule
     

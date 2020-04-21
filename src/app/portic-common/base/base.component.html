@@ -24,14 +24,14 @@
 
   <div class="w-100 mt-3 tool-set">
     <div class="container">
-      <a mat-stroked-button routerLink="." class="button">Lista de Documentos</a>
+      <a mat-stroked-button routerLink="/lista" class="button">Lista de Documentos</a>
     </div>
     <div class="container">
-      <a mat-stroked-button routerLink="." class="button">Nueva Lista de Carga</a>
+      <a mat-stroked-button routerLink="/lista/carga" class="button">Nueva Lista de Carga</a>
     </div>
     
     <div class="container">
-      <a mat-stroked-button routerLink="." class="button">Nueva Lista de Descarga</a>
+      <a mat-stroked-button routerLink="/lista/descarga" class="button">Nueva Lista de Descarga</a>
     </div>
 
     <div class="container no-border">
@@ -39,10 +39,10 @@
     </div>
   </div>
 
-  <div class="container-fluid mt-3">
+  <div class="container-fluid mt-3 content">
     <ng-content></ng-content>
   </div>
-
+ 
 </div>
 
 

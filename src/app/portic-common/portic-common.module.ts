@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 
 // Declarations
 import { ModalComponent } from './modal/modal.component';
@@ -35,7 +37,8 @@ import { MatDialog } from '@angular/material/dialog';
     MatInputModule,
     MatSelectModule, 
     FontAwesomeModule,
-    FormsModule,    
+    FormsModule, 
+    RouterModule,    
   ],
   providers: [MatDialog],
 })

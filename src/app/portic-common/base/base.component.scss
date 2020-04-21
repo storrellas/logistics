@@ -16,6 +16,9 @@
   .tool-set{
     display: flex;
     .button {
+      font-size: 1rem;
+      width: 90% !important;
+      min-width: unset!important;
       margin-right: 5px; 
       border: 0px;
       color: purple;

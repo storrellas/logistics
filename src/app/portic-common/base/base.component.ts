@@ -41,7 +41,7 @@ export class BaseComponent implements OnInit {
 
   onClickMe() {
     console.log("Taking my time")
-  } 
+  }  
 
 }
 
