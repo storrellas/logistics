@@ -2,8 +2,13 @@
 @import "variables";
 
 /* Table */
+.w-40{
+  width: 40%;
+}
+
 .item-list{
   overflow: auto;
+  cursor: pointer;
   .item-table {
     border-spacing: 0;
     border-collapse: separate;
@@ -22,6 +27,8 @@
       }
     }
 
+
+
     .body{
       color: black; 
       td {
@@ -29,17 +36,26 @@
         border-right: 1px solid $border;
         height: 22px;
       }
+
+      // Apply colors to rows
+      tr:nth-child(even){
+        background: $table-data-background;
+      }
+
+      tr:hover{
+        background: $table-data-hover;
+      }
     }
 
-    // Apply colors to rows
-    tr:nth-child(even){
-      background: $table-data-background;
-    }
+
+
+
   }
 }
 
 .tools {
   padding: 2em; 
+  padding-top: 100px;
   width: 10%; 
   height: 75%; 
   display: flex; 
@@ -51,6 +67,7 @@
 }
 
 .search{
+  height: 40px;
   .btn {
     @include portic-btn
   }
