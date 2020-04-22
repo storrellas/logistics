@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-export interface Item {
-  code: string;
-  name: string;
-  selected: boolean;
+export class Item {
+  code: string = undefined;
+  name: string = undefined;
+  selected: boolean = undefined;
 }
 
 @Component({
@@ -39,7 +39,7 @@ export class SelectorComponent implements OnInit {
   generata_random_table_data(){
     
     // Generate a max items
-    const table_data = Array(this.max_rows_table).fill({})
+    const table_data = Array(this.max_rows_table).fill( new Item() )
     const random_rows : number = Math.floor(Math.random() * Math.floor(this.max_rows_table));
     for (let i = 0; i < random_rows; i++) {
       table_data[i] = {code: this.generate_random_str(4), 
@@ -52,13 +52,47 @@ export class SelectorComponent implements OnInit {
     this.table_candidate_data = this.generata_random_table_data()
   }
 
+  // Selectable items
   onClickCandidateItem(event: MouseEvent, code: string){
     const index = this.table_candidate_data.findIndex( (element) => element.code == code)
     this.table_candidate_data[index].selected = !this.table_candidate_data[index].selected; 
   }
-
   onClickSelectSelectedItem(event: MouseEvent, code: string){
     const index = this.table_selected_data.findIndex( (element) => element.code == code)
     this.table_selected_data[index].selected = !this.table_candidate_data[index].selected; 
+  }
+
+  // Candidate <-> Selected
+  onCandidate2Selected(event: MouseEvent){
+    console.log("onCandidate2Selected")
+    const items_to_transfer = this.table_candidate_data.filter( (element) => element.selected);
+    let items_to_keep = this.table_selected_data.filter( (element) => element.code != undefined )
+    const table_candidate_list = items_to_keep.concat(items_to_transfer)
+
+    console.log(items_to_transfer)
+
+    let empty_row_list = Array(this.max_rows_table - table_candidate_list.length).fill( new Item() )
+    this.table_candidate_data = table_candidate_list.concat(empty_row_list)
+
+
+    // Leave those elements with selected == False
+    items_to_keep = this.table_candidate_data.filter( (element) => !element.selected);    
+    empty_row_list = Array(this.max_rows_table - items_to_keep.length).fill( new Item() )
+    this.table_candidate_data = items_to_keep.concat(empty_row_list)
+
+  }
+  onSelected2Candidate(event: MouseEvent){
+    console.log("onSelected2Candidate")
+
+    this.table_candidate_data = this.table_selected_data.filter( (element) => element.selected);
+    this.table_selected_data = this.table_selected_data.filter( (element) => !element.selected);
+  }
+  onAllCandidate2Selected(event: MouseEvent){
+    this.table_selected_data = this.table_candidate_data;
+    this.table_candidate_data = Array(this.max_rows_table).fill({});
+  }
+  onAllSelected2Candidate(event: MouseEvent){
+    this.table_candidate_data = this.table_selected_data;
+    this.table_selected_data = Array(this.max_rows_table).fill({}); 
   }
 }
