@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaComponent implements OnInit {
 
-  table_header: string[]; 
+  table_header: string[] = ["Barco", "Llegada", "Salida", "Tipo Doc", "Tipo Carga", "Emisor",
+                              "Receptor", "Estado", "Fecha", "No Documento", "Versión", "Usuario", "Estado Resguardo"]
   table_data: object[];
   table_rows: number[];
 
@@ -17,8 +18,6 @@ export class ListaComponent implements OnInit {
                               "Rodado Marca", "Rodado Clase", "Rodado Tipo"];
 
   constructor() { 
-    this.table_header = ["Barco", "Llegada", "Salida", "Tipo Doc", "Tipo Carga", "Emisor",
-                          "Receptor", "Estado", "Fecha", "No Documento", "Versión", "Usuario", "Estado Resguardo"]
 
     // Fill table data
     this.table_data = Array(10).fill({})

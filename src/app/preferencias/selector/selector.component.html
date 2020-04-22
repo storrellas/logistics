@@ -1,1 +1,49 @@
-<p>selector works!</p>
+<!-- <div class="doc-list">
+  <table class="doc-table">
+    <tr class="title">
+      <th *ngFor="let header of table_header">{{header}}</th>
+    </tr>
+    <tr *ngFor="let data of table_data" class="body">
+        <td>{{data.code}}</td>
+        <td>{{data.name}}</td>
+    </tr>
+  </table>
+</div> -->
+
+<!-- <div style="width: 20%; height: 75%; background: red"></div>
+<div style="width: 20%; height: 75%; background: blue"></div> -->
+
+<div style="display: flex; justify-content: center; align-items:center; background: yellow" class="w-100 h-100">
+  <div style="width: 30%; height: 75%; background: red">
+
+    <div class="doc-list w-100 h-100" style="display: flex; justify-content: center; align-items:center">
+      <table class="doc-table w-100">
+        <tr class="title">
+          <th *ngFor="let header of table_header">{{header}}</th>
+        </tr>
+        <tr *ngFor="let data of table_data" class="body">
+            <td>{{data.code}}</td>
+            <td>{{data.name}}</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+  <div style="width: 10%; height: 75%; background: brown">
+  </div>
+  <div style="width: 30%; height: 75%; background: blue">
+
+    <div class="doc-list w-100 h-100" style="display: flex; justify-content: center; align-items:center">
+      <table class="doc-table w-100">
+        <tr class="title">
+          <th *ngFor="let header of table_header">{{header}}</th>
+        </tr>
+        <tr *ngFor="let data of table_data" class="body">
+            <td>{{data.code}}</td>
+            <td>{{data.name}}</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>
