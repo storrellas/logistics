@@ -2,8 +2,8 @@
 @import "variables";
 
 /* Table */
-.doc-list{
-  .doc-table {
+.item-list{
+  .item-table {
     border-spacing: 0;
     border-collapse: separate;
     text-align: center;
@@ -34,5 +34,23 @@
     tr:nth-child(even){
       background: $table-data-background;
     }
+  }
+}
+
+.tools {
+  padding: 2em; 
+  width: 10%; 
+  height: 75%; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center;
+  .btn {
+    @include portic-btn
+  }
+}
+
+.search{
+  .btn {
+    @include portic-btn
   }
 }

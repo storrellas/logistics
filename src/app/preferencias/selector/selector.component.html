@@ -1,23 +1,12 @@
-<!-- <div class="doc-list">
-  <table class="doc-table">
-    <tr class="title">
-      <th *ngFor="let header of table_header">{{header}}</th>
-    </tr>
-    <tr *ngFor="let data of table_data" class="body">
-        <td>{{data.code}}</td>
-        <td>{{data.name}}</td>
-    </tr>
-  </table>
-</div> -->
+<div style="display: flex; justify-content: center; align-items:center" class="w-100 h-100">
+  <div style="width: 30%; height: 75%">
 
-<!-- <div style="width: 20%; height: 75%; background: red"></div>
-<div style="width: 20%; height: 75%; background: blue"></div> -->
-
-<div style="display: flex; justify-content: center; align-items:center; background: yellow" class="w-100 h-100">
-  <div style="width: 30%; height: 75%; background: red">
-
-    <div class="doc-list w-100 h-100" style="display: flex; justify-content: center; align-items:center">
-      <table class="doc-table w-100">
+    <div class="search d-flex" style="height: 40px">
+      <input type="text" class="form-control mr-2" placeholder="Nombre">
+      <button type="button" class="btn">Buscar</button>
+    </div>    
+    <div class="item-list w-100 h-100 mt-2">
+      <table class="item-table w-100">
         <tr class="title">
           <th *ngFor="let header of table_header">{{header}}</th>
         </tr>
@@ -29,12 +18,17 @@
     </div>
 
   </div>
-  <div style="width: 10%; height: 75%; background: brown">
+  <div class="tools" style="padding-top: 100px">
+    <button type="button" class="btn"> > </button>
+    <button type="button" class="btn mt-2"> < </button>
+    <button type="button" class="btn mt-2"> >> </button>
+    <button type="button" class="btn mt-2"> << </button>
   </div>
-  <div style="width: 30%; height: 75%; background: blue">
+  <div style="width: 30%; height: 75%">
 
-    <div class="doc-list w-100 h-100" style="display: flex; justify-content: center; align-items:center">
-      <table class="doc-table w-100">
+    <div class="d-flex align-items-center" style="height: 40px">Seleccionadas</div>
+    <div class="item-list w-100 h-100 mt-2">
+      <table class="item-table w-100">
         <tr class="title">
           <th *ngFor="let header of table_header">{{header}}</th>
         </tr>
