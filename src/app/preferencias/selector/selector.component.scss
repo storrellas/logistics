@@ -37,6 +37,10 @@
         height: 22px;
       }
 
+      .selected{
+        background: $table-data-selected;
+      }
+
       // Apply colors to rows
       tr:nth-child(even){
         background: $table-data-background;

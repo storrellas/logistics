@@ -13,9 +13,11 @@
               </tr>
             </thead>
             <tbody class="body">
-              <tr *ngFor="let data of table_data">
-                  <td (click)="onSelectItem($event, data.code)">{{data.code}}</td>
-                  <td (click)="onSelectItem($event, data.code)">{{data.name}}</td>
+              <tr *ngFor="let data of table_candidate_data">
+                  <td (click)="onClickCandidateItem($event, data.code)" 
+                      [ngClass]="{'selected': data.selected }">{{data.code}}</td>
+                  <td (click)="onClickCandidateItem($event, data.code)" 
+                      [ngClass]="{'selected': data.selected }">{{data.name}}</td>
               </tr>
             </tbody>
       </table>
@@ -40,8 +42,11 @@
         </thead>
         <tbody class="body">
           <tr *ngFor="let data of table_selected_data">
-              <td (click)="onSelectItem($event, data.code)">{{data.code}}</td>
-              <td (click)="onSelectItem($event, data.code)">{{data.name}}</td>
+              <td (click)="onClickSelectSelectedItem($event, data.code)"
+                  [ngClass]="{'selected': data.selected }">{{data.code}}</td>
+
+              <td (click)="onClickSelectSelectedItem($event, data.code)"
+                  [ngClass]="{'selected': data.selected }">{{data.code}}</td>
           </tr>
         </tbody>
       </table>
