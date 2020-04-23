@@ -5,23 +5,7 @@
       <input type="text" class="form-control mr-2" placeholder="Nombre">
       <button type="button" class="btn" (click)="onSearch($event)">Buscar</button>
     </div>    
-    <div class="item-list w-100 h-100 mt-2">
-      <table class="item-table w-100">
-          <thead>
-              <tr class="title">
-                <th *ngFor="let header of table_header">{{header}}</th>
-              </tr>
-            </thead>
-            <tbody class="body">
-              <tr *ngFor="let data of table_candidate_data">
-                  <td (click)="onClickCandidateItem($event, data.code)" 
-                      [ngClass]="{'selected': data.selected }">{{data.code}}</td>
-                  <td (click)="onClickCandidateItem($event, data.code)" 
-                      [ngClass]="{'selected': data.selected }">{{data.name}}</td>
-              </tr>
-            </tbody>
-      </table>
-    </div>
+    <app-table #tbl_candidate [table_header]="table_header"></app-table>
 
   </div>
   <div class="tools">
@@ -33,24 +17,8 @@
   <div class="h-75 w-40">
 
     <div class="search d-flex align-items-center">Seleccionadas</div>
-    <div class="item-list w-100 h-100 mt-2">
-      <table class="item-table w-100">
-        <thead>
-          <tr class="title">
-            <th *ngFor="let header of table_header">{{header}}</th>
-          </tr>
-        </thead>
-        <tbody class="body">
-          <tr *ngFor="let data of table_selected_data">
-              <td (click)="onClickSelectedItem($event, data.code)"
-                  [ngClass]="{'selected': data.selected }">{{data.code}}</td>
-
-              <td (click)="onClickSelectedItem($event, data.code)"
-                  [ngClass]="{'selected': data.selected }">{{data.name}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-table #tbl_selected [table_header]="table_header">      
+    </app-table>
 
   </div>
 </div>

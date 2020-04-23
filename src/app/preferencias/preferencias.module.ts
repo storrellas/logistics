@@ -10,7 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PorticCommonModule } from '../portic-common/portic-common.module';
 import { SelectorComponent } from './selector/selector.component';
 import { TableComponent } from './table/table.component';
-import { ConsignatariosComponent } from './consignatarios/consignatarios.component'
+import { ConsignatariosComponent } from './consignatarios/consignatarios.component';
 
 
 @NgModule({

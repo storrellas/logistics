@@ -6,57 +6,6 @@
   width: 40%;
 }
 
-.item-list{
-  overflow: auto;
-  cursor: pointer;
-  .item-table {
-    border-spacing: 0;
-    border-collapse: separate;
-    text-align: center;
-    font-size: 12px;
-    border: 1px solid $border;
-
-    .title{
-      color: $font-color;
-      @include portic-bold-mixin;
-      background: $table-header-background;
-      /*#800080,#922492,#A448A4,#B66DB6,#C891C8,#DAB6DA,#ECDAEC*/      
-      th {
-        border: 1px solid $border;
-        @include portic-bold-mixin;        
-      }
-    }
-
-
-
-    .body{
-      color: black; 
-      td {
-        border-left: 1px solid $border;
-        border-right: 1px solid $border;
-        height: 22px;
-      }
-
-      .selected{
-        background: $table-data-selected;
-      }
-
-      // Apply colors to rows
-      tr:nth-child(even){
-        background: $table-data-background;
-      }
-
-      tr:hover{
-        background: $table-data-hover;
-      }
-    }
-
-
-
-
-  }
-}
-
 .tools {
   padding: 2em; 
   padding-top: 100px;
