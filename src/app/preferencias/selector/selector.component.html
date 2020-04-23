@@ -42,10 +42,10 @@
         </thead>
         <tbody class="body">
           <tr *ngFor="let data of table_selected_data">
-              <td (click)="onClickSelectSelectedItem($event, data.code)"
+              <td (click)="onClickSelectedItem($event, data.code)"
                   [ngClass]="{'selected': data.selected }">{{data.code}}</td>
 
-              <td (click)="onClickSelectSelectedItem($event, data.code)"
+              <td (click)="onClickSelectedItem($event, data.code)"
                   [ngClass]="{'selected': data.selected }">{{data.name}}</td>
           </tr>
         </tbody>
