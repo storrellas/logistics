@@ -53,10 +53,12 @@ export class SelectorComponent implements OnInit {
 
   // Selectable items
   onClickCandidateItem(event: MouseEvent, code: string){
+    if( code == undefined ) return;
     const index = this.table_candidate_data.findIndex( (element) => element.code == code)
     this.table_candidate_data[index].selected = !this.table_candidate_data[index].selected; 
   }
   onClickSelectSelectedItem(event: MouseEvent, code: string){
+    if( code == undefined ) return;
     const index = this.table_selected_data.findIndex( (element) => element.code == code)
     this.table_selected_data[index].selected = !this.table_candidate_data[index].selected; 
   }
