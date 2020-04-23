@@ -2932,6 +2932,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onClickCandidateItem",
         value: function onClickCandidateItem(event, code) {
+          if (code == undefined) return;
           var index = this.table_candidate_data.findIndex(function (element) {
             return element.code == code;
           });
@@ -2940,6 +2941,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onClickSelectSelectedItem",
         value: function onClickSelectSelectedItem(event, code) {
+          if (code == undefined) return;
           var index = this.table_selected_data.findIndex(function (element) {
             return element.code == code;
           });
