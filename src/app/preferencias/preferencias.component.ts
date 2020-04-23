@@ -10,7 +10,7 @@ export class PreferenciasComponent implements OnInit {
 
   @ViewChild(TableComponent) consignatarios_table: TableComponent;
   
-  active = 1; 
+  active = 2; 
   constructor() { }
 
   ngOnInit(): void {

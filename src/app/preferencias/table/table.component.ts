@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { element } from 'protractor';
 
 export class Item {
   constructor(public code: string = undefined, 
@@ -18,7 +19,6 @@ export class TableComponent implements OnInit {
 
   max_rows_table: number = 10;
 
-
   constructor() { 
     this.table_data = this.generate_random_table_data()
   }
@@ -35,6 +35,21 @@ export class TableComponent implements OnInit {
        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+  }
+
+  fillEmptiness(table_data: Item[]){
+    let empty_row = []
+    if( this.max_rows_table - table_data.length > 0)
+      empty_row = Array(this.max_rows_table - table_data.length).fill( new Item() )
+    return table_data.concat( empty_row )
+  }
+
+  removeEmptiness(table_data: Item[]){
+    return table_data.filter( (element) => element.code != undefined)
+  }
+
+  removeSelection(table_data: Item[]){
+    return table_data.map( (element) => { if(element.code != undefined) element.selected = false })
   }
 
   generate_random_table_data(){
@@ -58,8 +73,6 @@ export class TableComponent implements OnInit {
     if( code == undefined ) return;
     const index = this.table_data.findIndex( (element) => element.code == code)
     this.table_data[index].selected = !this.table_data[index].selected; 
-
-    console.log("Selected ", this.table_data)
   }
 
 
