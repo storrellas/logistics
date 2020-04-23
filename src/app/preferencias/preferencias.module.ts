@@ -10,11 +10,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PorticCommonModule } from '../portic-common/portic-common.module';
 import { SelectorComponent } from './selector/selector.component';
 import { TableComponent } from './table/table.component';
-import { ConsignatariosComponent } from './consignatarios/consignatarios.component';
 
 
 @NgModule({
-  declarations: [PreferenciasComponent, SelectorComponent, TableComponent, ConsignatariosComponent],
+  declarations: [PreferenciasComponent, SelectorComponent, TableComponent],
   imports: [
     CommonModule,
     BrowserModule,
