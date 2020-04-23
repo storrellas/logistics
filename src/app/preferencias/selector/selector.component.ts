@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { element } from 'protractor';
 
 export class Item {
   constructor(public code: string = undefined, 
@@ -26,7 +27,7 @@ export class SelectorComponent implements OnInit {
     this.table_selected_data = this.generata_random_table_data()
   }
 
-  generate_random_str(length) {
+  generate_random_str(length: number) {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
@@ -38,6 +39,7 @@ export class SelectorComponent implements OnInit {
 
   generata_random_table_data(){
     const random_rows : number = Math.floor(Math.random() * Math.floor(this.max_rows_table));
+    //const random_rows = 2;
     let table_data = []
     for(let i = 0 ; i < random_rows; i++){
       table_data.push( new Item(this.generate_random_str(4), 'myname', false) )
@@ -52,7 +54,7 @@ export class SelectorComponent implements OnInit {
   }
 
   // Selectable items
-  onClickCandidateItem(event: MouseEvent, code: string){
+  onClickCandidateItem(_event: MouseEvent, code: string){
     if( code == undefined ) return;
     const index = this.table_candidate_data.findIndex( (element) => element.code == code)
     this.table_candidate_data[index].selected = !this.table_candidate_data[index].selected; 
@@ -63,32 +65,42 @@ export class SelectorComponent implements OnInit {
     this.table_selected_data[index].selected = !this.table_selected_data[index].selected; 
   }
 
+
+
   // Candidate <-> Selected
   onSource2Destination(source: Item[], destination: Item[]){
-    // Add items
-    let items_to_keep = destination.filter( (element) => element.code != undefined )
-    let items_to_add = source.filter( (element) => element.selected )
-    items_to_keep = items_to_keep.concat(items_to_add)
-    items_to_keep.map( (element) => element.selected = false)
+    // Remove undefined
+    let filter_source = source.filter((element) => element.code != undefined);
+    let filter_destination = destination.filter((element) => element.code != undefined);
 
-    let empty_row = []
-    if( this.max_rows_table - items_to_keep.length > 0)
-      empty_row = Array(this.max_rows_table - items_to_keep.length).fill( new Item() )    
-    destination = items_to_keep.concat( empty_row )
+    // Get selected
+    let items_to_move = filter_source.filter( (element) => element.selected == true)
 
-    
-    // Remove items
-    items_to_keep = source.filter( (element) => element.selected == false )
-    if( this.max_rows_table - items_to_keep.length > 0)
-      empty_row = Array(this.max_rows_table - items_to_keep.length).fill( new Item() )    
-    source = items_to_keep.concat( empty_row )
+    // Add to destination
+    source = filter_source.filter( (element) => !items_to_move.includes(element) )
+    destination = filter_destination.concat(items_to_move)
+
+    // Fill emptiness
+    let empty_row_list = []
+    if( this.max_rows_table - source.length > 0)
+      empty_row_list = Array(this.max_rows_table - source.length).fill( new Item() )    
+    source = source.concat(empty_row_list)
+
+    empty_row_list = []
+    if( this.max_rows_table - destination.length > 0)
+      empty_row_list = Array(this.max_rows_table - destination.length).fill( new Item() )    
+    destination = destination.concat(empty_row_list)
+
+    // Mark all as unselected
+    source.map( (element) => { if(element.code != undefined) element.selected = false })
+    destination.map( (element) => { if(element.code != undefined) element.selected = false })
+
     return [source, destination]
   }
 
   onCandidate2Selected(event: MouseEvent){
     [this.table_candidate_data, this.table_selected_data] = 
       this.onSource2Destination( this.table_candidate_data, this.table_selected_data)
-
   }
   onSelected2Candidate(event: MouseEvent){
     [this.table_selected_data, this.table_candidate_data] = 

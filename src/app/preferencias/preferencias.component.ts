@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { TableComponent } from './table/table.component'
 
 @Component({
   selector: 'app-preferencias',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./preferencias.component.scss']
 })
 export class PreferenciasComponent implements OnInit {
+
+  @ViewChild(TableComponent) consignatarios_table: TableComponent;
+  
   active = 1; 
   constructor() { }
 
