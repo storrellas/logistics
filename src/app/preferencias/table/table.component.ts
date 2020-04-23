@@ -1,5 +1,25 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { element } from 'protractor';
+
+export class ItemArrayUtils {
+  
+
+  static fillEmptiness(min_rows_table, table_data: Item[]){
+    let empty_row = []
+    if( min_rows_table - table_data.length > 0)
+      empty_row = Array(min_rows_table - table_data.length).fill( new Item() )
+    return table_data.concat( empty_row )
+  }
+
+  static removeEmptiness(table_data: Item[]){
+    return table_data.filter( (element) => element.code != undefined)
+  }
+
+  static removeSelection(table_data: Item[]){
+    table_data.map( (element) => { if(element.code != undefined) element.selected = false })
+    return table_data
+  }
+
+}
 
 export class Item {
   constructor(public code: string = undefined, 
@@ -17,7 +37,7 @@ export class TableComponent implements OnInit {
   @Input() table_header: string[] = ["col1", "col2"]
   table_data: Item[] = [];
 
-  max_rows_table: number = 10;
+  min_rows_table: number = 10;
 
   constructor() { 
     this.table_data = this.generate_random_table_data()
@@ -37,30 +57,15 @@ export class TableComponent implements OnInit {
     return result;
   }
 
-  fillEmptiness(table_data: Item[]){
-    let empty_row = []
-    if( this.max_rows_table - table_data.length > 0)
-      empty_row = Array(this.max_rows_table - table_data.length).fill( new Item() )
-    return table_data.concat( empty_row )
-  }
-
-  removeEmptiness(table_data: Item[]){
-    return table_data.filter( (element) => element.code != undefined)
-  }
-
-  removeSelection(table_data: Item[]){
-    return table_data.map( (element) => { if(element.code != undefined) element.selected = false })
-  }
-
   generate_random_table_data(){
-    //const random_rows : number = Math.floor(Math.random() * Math.floor(this.max_rows_table));
-    const random_rows : number = 2;
+    const random_rows : number = Math.floor(Math.random() * Math.floor(this.min_rows_table));
     let table_data = []
     for(let i = 0 ; i < random_rows; i++){
       table_data.push( new Item(this.generate_random_str(4), 'myname', false) )
     }
-    const empty_row = Array(this.max_rows_table - table_data.length).fill( new Item() )
-    table_data = table_data.concat( empty_row )
+
+    // Complete table with empty rows
+    table_data = ItemArrayUtils.fillEmptiness(this.min_rows_table, table_data)
     return table_data;
   }
 

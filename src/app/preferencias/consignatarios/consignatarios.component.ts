@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { TableComponent, Item } from '../table/table.component';
+import { TableComponent, ItemArrayUtils, Item } from '../table/table.component';
 
 @Component({
   selector: 'app-consignatarios',
@@ -13,7 +13,7 @@ export class ConsignatariosComponent implements OnInit {
   table_candidate_data: Item[];
   table_selected_data: Item[];
 
-  max_rows_table: number = 10;
+  min_rows_table: number = 10;
 
   @ViewChild('tbl_candidate') table_candidate_component: TableComponent;
   @ViewChild('tbl_selected') table_selected_component: TableComponent;
@@ -30,8 +30,8 @@ export class ConsignatariosComponent implements OnInit {
   onSource2Destination(source: Item[], destination: Item[]){
 
     // Remove undefined
-    let filter_source = source.filter((element) => element.code != undefined);
-    let filter_destination = destination.filter((element) => element.code != undefined);
+    let filter_source = ItemArrayUtils.removeEmptiness(source)
+    let filter_destination = ItemArrayUtils.removeEmptiness(destination)
 
     // Get selected
     let items_to_move = filter_source.filter( (element) => element.selected == true)
@@ -41,19 +41,12 @@ export class ConsignatariosComponent implements OnInit {
     destination = filter_destination.concat(items_to_move)
 
     // Fill emptiness
-    let empty_row_list = []
-    if( this.max_rows_table - source.length > 0)
-      empty_row_list = Array(this.max_rows_table - source.length).fill( new Item() )    
-    source = source.concat(empty_row_list)
-
-    empty_row_list = []
-    if( this.max_rows_table - destination.length > 0)
-      empty_row_list = Array(this.max_rows_table - destination.length).fill( new Item() )    
-    destination = destination.concat(empty_row_list)
+    source = ItemArrayUtils.fillEmptiness(this.min_rows_table, source)
+    destination = ItemArrayUtils.fillEmptiness(this.min_rows_table, destination)
 
     // Mark all as unselected
-    source.map( (element) => { if(element.code != undefined) element.selected = false })
-    destination.map( (element) => { if(element.code != undefined) element.selected = false })
+    source = ItemArrayUtils.removeSelection(source)
+    destination = ItemArrayUtils.removeSelection(destination)
 
     return [source, destination]
   }
@@ -74,17 +67,20 @@ export class ConsignatariosComponent implements OnInit {
 
   onAllSource2Destination(source: Item[], destination: Item[]){
     // Add items
-    let items_to_keep = destination.filter( (element) => element.code != undefined )
-    let items_to_add = source.filter( (element) => element.code != undefined )
-    items_to_keep = items_to_keep.concat(items_to_add)
-    items_to_keep.map( (element) => element.selected = false)
-    let empty_row = []
-    if( this.max_rows_table - items_to_keep.length > 0)
-      empty_row = Array(this.max_rows_table - items_to_keep.length).fill( new Item() )    
-    destination = items_to_keep.concat( empty_row )
-    
-    // Remove items
-    source = Array(this.max_rows_table).fill(new Item());
+    let filter_source = ItemArrayUtils.removeEmptiness(source)
+    let filter_destination = ItemArrayUtils.removeEmptiness(destination)
+
+    destination = filter_destination.concat(filter_source)
+
+    // Fill emptiness
+    destination = ItemArrayUtils.fillEmptiness(this.min_rows_table, destination)
+
+    // Mark all as unselected
+    destination = ItemArrayUtils.removeSelection(destination)
+
+    // Remove items on source
+    source = Array(this.min_rows_table).fill(new Item());
+
     return [source, destination]
   }
 

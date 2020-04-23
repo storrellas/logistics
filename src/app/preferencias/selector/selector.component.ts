@@ -7,6 +7,8 @@ export class Item {
               public selected: boolean = undefined){}
 }
 
+
+
 @Component({
   selector: 'app-selector',
   templateUrl: './selector.component.html',
