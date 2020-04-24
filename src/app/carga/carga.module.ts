@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListaCargaComponent } from './lista-carga.component';
+import { CargaComponent } from './carga.component';
 
 // Import
 import { PorticCommonModule } from '../portic-common/portic-common.module'
 
 @NgModule({
-  declarations: [ListaCargaComponent],
+  declarations: [CargaComponent],
   imports: [
     CommonModule,
     PorticCommonModule
   ]
 })
-export class ListaCargaModule { }
+export class CargaModule { }
 
-export { ListaCargaComponent } from './lista-carga.component';
+export { CargaComponent } from './carga.component';

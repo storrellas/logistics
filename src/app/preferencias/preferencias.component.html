@@ -2,11 +2,10 @@
   <div class="tab">
       <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
         <li [ngbNavItem]="1">
-          <a ngbNavLink>Terminales</a>
+          <a ngbNavLink (click)="onTerminalesChanged($event)">Terminales</a>
           <ng-template ngbNavContent>
             <div class="content p-3">
-              <app-selector #terminales [table_header]="['Codigo','Nombre']"
-              (selectionChange)='onTerminalesChanged($event)'>
+              <app-selector #terminales [table_header]="['Codigo','Nombre']">
 
               </app-selector>
             </div>
@@ -16,8 +15,7 @@
           <a ngbNavLink>Consignatarios</a>
           <ng-template ngbNavContent>
             <div class="content p-3">
-              <app-selector #consignatarios [table_header]="['Nombre','Ciudad']"
-                          (selectionChange)='onConsignatariosChanged($event)'>
+              <app-selector #consignatarios [table_header]="['Nombre','Ciudad']">
               </app-selector>
             </div>
           </ng-template>
@@ -26,8 +24,7 @@
           <a ngbNavLink>Líneas Marítimas</a>
           <ng-template ngbNavContent>
               <div class="content p-3">
-                <app-selector #lineas_maritimas [table_header]="['Codigo','Nombre']"
-                            (selectionChange)='onLineasMaritimasChanged($event)'>
+                <app-selector #lineas_maritimas [table_header]="['Codigo','Nombre']">
                 </app-selector>
               </div>
           </ng-template>
@@ -36,8 +33,7 @@
             <a ngbNavLink>Marcas Rodados</a>
             <ng-template ngbNavContent>
                 <div class="content p-3">
-                  <app-selector #marcas_rodados [table_header]="['Codigo','Nombre']"
-                                (selectionChange)='onMarcasRodadosChanged($event)'>
+                  <app-selector #marcas_rodados [table_header]="['Codigo','Nombre']">
                   </app-selector>
                 </div>
             </ng-template>

@@ -16,8 +16,6 @@ export class SelectorComponent implements OnInit {
   table_candidate_data: Item[];
   table_selected_data: Item[];
 
-  @Output() selectionChange = new EventEmitter();
-
   @ViewChild('tbl_candidate') table_candidate_component: TableComponent;
   @ViewChild('tbl_selected') table_selected_component: TableComponent;
 
@@ -51,9 +49,6 @@ export class SelectorComponent implements OnInit {
     source = ItemArrayUtils.removeSelection(source)
     destination = ItemArrayUtils.removeSelection(destination)
 
-    // Notify parent
-    this.selectionChange.emit()
-
     return [source, destination]
   }
 
@@ -86,9 +81,6 @@ export class SelectorComponent implements OnInit {
 
     // Remove items on source
     source = Array(this.min_rows_table).fill(new Item());
-
-    // Notify parent
-    this.selectionChange.emit()
 
     return [source, destination]
   }
