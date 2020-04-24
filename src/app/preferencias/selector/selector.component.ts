@@ -13,9 +13,6 @@ export class SelectorComponent implements OnInit {
   min_rows_table: number = 10;
 
   @Input() table_header: string[] = ["Código", "Nombre"]
-  table_candidate_data: Item[];
-  table_selected_data: Item[];
-
   @ViewChild('tbl_candidate') table_candidate_component: TableComponent;
   @ViewChild('tbl_selected') table_selected_component: TableComponent;
 
