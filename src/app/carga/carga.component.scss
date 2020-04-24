@@ -1,0 +1,13 @@
+@import "styles";
+@import "variables";
+
+.tab{
+  @include portic-tab
+}
+.btn{
+  @include portic-btn
+}
+.form-group{
+  margin-bottom: 0.7rem;
+  font-weight: initial;
+}

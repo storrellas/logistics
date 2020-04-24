@@ -20,7 +20,8 @@ export class PreferenciasComponent implements OnInit {
     router.events.subscribe(e => {
       if(e instanceof NavigationEnd){
         if(e.url == 'preferencias'){
-          console.log("Leaving preferencias. Please update here with REST call")
+          // NOTE: Please update here with REST call by inspecting viewchilds'
+          console.log("Leaving preferencias. ")
         }
       }
     });
@@ -29,17 +30,5 @@ export class PreferenciasComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onTerminalesChanged(event: MouseEvent){
-    console.log("onTerminalesChanged")
-  }
-  onConsignatariosChanged(){
-    console.log("onConsignatariosChanged")
-  }
-  onLineasMaritimasChanged(){
-    console.log("onLineasMaritimasChanged")
-  }
-  onMarcasRodadosChanged(){
-    console.log("onMarcasRodadosChanged")
-  }
 }
  

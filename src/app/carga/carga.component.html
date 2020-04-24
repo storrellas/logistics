@@ -1,3 +1,158 @@
 <portic-base>
-    <p>carga works!</p>
-</portic-base>  
+    <div class="tab">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+          <li [ngbNavItem]="1">
+            <a ngbNavLink>Datos Generales</a>
+            <ng-template ngbNavContent>
+              <div class="content p-3">
+                <p>Lista de Carga</p>
+                <div class="d-flex w-100 justify-content-center pl-3 pr-3">
+                    <div class="w-50">
+                        
+                        <form>
+                            <div class="form-group row">
+                                <label for="noLista" class="col-sm-6 col-form-label">Número de Lista</label>
+                                <div class="col-sm-6">
+                                    <input type="text" readonly class="form-control-plaintext" id="noLista" value="Numero de Lista">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="tipoCarga" class="col-sm-6 col-form-label">Tipo de Carga</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="receptor" class="col-sm-6 col-form-label">Receptor del mensaje</label>
+                                <div class="col-sm-6">
+                                    <select id="receptor" class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="puerto" class="col-sm-6 col-form-label">Puerto de Carga</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="puerto" placeholder="Puerto de Carga">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="remitente" class="col-sm-6 col-form-label">Remitente de la lista</label>
+                                <div class="col-sm-6">
+                                    <select id="remitente" class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="viaje" class="col-sm-6 col-form-label">Número de viaje</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="viaje" placeholder="Número de viaje">
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="w-50 ml-3">
+                        <form>
+                            <div class="form-group row">
+                                <label for="buque" class="col-sm-6 col-form-label">Nombre Buque</label>
+                                <div class="col-sm-6">
+                                    <input type="text" readonly class="form-control-plaintext" id="buque" value="Numero de Lista">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="escala" class="col-sm-6 col-form-label">Número escala</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="puerto" placeholder="Número escala">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="terminal" class="col-sm-6 col-form-label">Terminal de Carga</label>
+                                <div class="col-sm-6">
+                                    <select id="terminal" class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="receptor" class="col-sm-6 col-form-label">Receptor de lista</label>
+                                <div class="col-sm-6">
+                                    <select id="linea" class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="linea" class="col-sm-6 col-form-label">Código de línea</label>
+                                <div class="col-sm-6">
+                                    <select id="linea" class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>                    
+                    </div>
+                </div>
+                <div class="text-right mt-3 pl-3 pr-3">                    
+                    <button type="button" class="btn">Guardar</button>
+                </div>
+              </div>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="2">
+            <a ngbNavLink>Contenedores</a>
+            <ng-template ngbNavContent>
+              <div class="content p-3">
+                    <p>MyFirstTest</p>
+              </div>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="3">
+            <a ngbNavLink>Rodados</a>
+            <ng-template ngbNavContent>
+                <div class="content p-3">
+                        <p>MyFirstTest</p>
+                </div>
+            </ng-template>
+            </li>
+        </ul>        
+        <div [ngbNavOutlet]="nav"></div>
+    </div>
+  </portic-base>
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  

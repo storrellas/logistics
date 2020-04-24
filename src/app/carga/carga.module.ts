@@ -4,12 +4,15 @@ import { CargaComponent } from './carga.component';
 
 // Import
 import { PorticCommonModule } from '../portic-common/portic-common.module'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [CargaComponent],
   imports: [
     CommonModule,
-    PorticCommonModule
+    NgbModule,
+    PorticCommonModule,
   ]
 })
 export class CargaModule { }

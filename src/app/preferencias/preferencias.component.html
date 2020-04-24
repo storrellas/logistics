@@ -2,7 +2,7 @@
   <div class="tab">
       <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
         <li [ngbNavItem]="1">
-          <a ngbNavLink (click)="onTerminalesChanged($event)">Terminales</a>
+          <a ngbNavLink>Terminales</a>
           <ng-template ngbNavContent>
             <div class="content p-3">
               <app-selector #terminales [table_header]="['Codigo','Nombre']">
