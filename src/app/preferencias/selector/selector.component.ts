@@ -1,6 +1,7 @@
 import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
-import { TableComponent, ItemArrayUtils, Item } from '../table/table.component';
+//import { TableComponent, ItemArrayUtils, Item } from '../table/table.component';
+import { TableComponent, ItemArrayUtils, Item } from '../../portic-common/portic-common.module';
 
 @Component({
   selector: 'app-selector',

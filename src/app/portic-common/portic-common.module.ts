@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 // Declarations
 import { ModalComponent } from './modal/modal.component';
 import { BaseComponent } from './base/base.component';
+import { TableComponent, Item, ItemArrayUtils } from './table/table.component'
 
 // Imports - Other
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from "@angular/forms";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Providers
 import { MatDialog } from '@angular/material/dialog';
@@ -25,8 +27,9 @@ import { MatDialog } from '@angular/material/dialog';
   declarations: [
     BaseComponent,
     ModalComponent,
+    TableComponent
   ],
-  exports: [BaseComponent],
+  exports: [BaseComponent, TableComponent],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -37,6 +40,7 @@ import { MatDialog } from '@angular/material/dialog';
     MatInputModule,
     MatSelectModule, 
     FontAwesomeModule,
+    NgbModule,
     FormsModule, 
     RouterModule,    
   ],
@@ -44,4 +48,4 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class PorticCommonModule { }
 
-export { BaseComponent };
+export { BaseComponent, TableComponent, Item, ItemArrayUtils };
