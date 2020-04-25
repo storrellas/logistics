@@ -11,3 +11,7 @@
   margin-bottom: 0.7rem;
   font-weight: initial;
 }
+
+.doc-tool{
+  @include portic-doc-tool
+}

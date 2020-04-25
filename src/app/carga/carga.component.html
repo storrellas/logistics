@@ -130,7 +130,9 @@
             <a ngbNavLink>Contenedores</a>
             <ng-template ngbNavContent>
               <div class="content p-3">
-                    <p>MyFirstTest</p>
+                <p>MyFirstTest</p>
+                <app-table #tbl_selected [table_header]="['Tipo','Matricula', 'Puerto descarga', 'Lleno/Vacío', 'MMPP', 'Peso Verif.', 'Despacho', 'Confirmado']" [min_rows_table]="10">
+                </app-table>
               </div>
             </ng-template>
           </li>
@@ -138,7 +140,20 @@
             <a ngbNavLink>Rodados</a>
             <ng-template ngbNavContent>
                 <div class="content p-3">
-                        <p>MyFirstTest</p>
+                    <p>MyFirstTest</p>
+                    <div class="doc-tool w-100 mt-3">
+                        <button type="button" class="tool disabled">DUAs</button>
+                        <button type="button" class="tool">Fusionar</button>
+                        <button type="button" class="tool">Imprimir</button>
+                        <button type="button" class="tool">Historico</button>
+                        <button type="button" class="tool">Editar</button>
+                        <button type="button" class="tool">Eliminar</button>
+                        <button type="button" class="tool">Ver</button>
+                        <button type="button" class="tool">Enviar</button>
+                        <button type="button" class="tool">Enviar a resguardo</button>
+                    </div>
+                    <app-table #tbl_selected [table_header]="['Clase','Tipo', 'Cantidad', 'Bastidor', 'Matrícula', 'Usado', 'Marca', 'Modelo', 'Puerto descarga', 'Grupo']" [min_rows_table]="10">
+                    </app-table>
                 </div>
             </ng-template>
             </li>

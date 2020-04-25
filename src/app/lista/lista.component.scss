@@ -22,38 +22,7 @@
 
 /* Tool */
 .doc-tool{
-  border: 1px solid $border; 
-  padding: 0.3em; 
-  display: flex; 
-  justify-content: space-between;
-
-  .tool{
-    font-size: 0.8rem;
-    border: 0px; 
-    border-radius: 5px; 
-    color: $font-color;
-    padding: 0.7em 1em 0.7em 1em;
-    outline: none;
-    box-shadow: none;  
-    @include portic-bold-mixin;
-    &:hover{
-      background: $tool-background-hover;    
-    }
-    &:active{
-      color: white;
-      background: $tool-background-active;      
-    }
-  }
-  .disabled{
-    color: grey;
-    background: transparent;
-    cursor: initial;
-    &:hover{
-      color: grey;
-      background: transparent;
-      cursor: initial;
-    }
-  }
+  @include portic-doc-tool
 }
 
 

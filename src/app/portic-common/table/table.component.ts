@@ -40,10 +40,10 @@ export class TableComponent implements OnInit {
   table_data_empty: Row[] = [];
 
   constructor() { 
-    this.refresh_random_table_data()
   }
 
   ngOnInit(): void {
+    this.refresh_random_table_data()
   }
 
   generate_random_str(length) {
