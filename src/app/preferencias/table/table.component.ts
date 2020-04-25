@@ -1,29 +1,29 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 export class ItemArrayUtils {
-  
 
-  static fillEmptiness(min_rows_table, table_data: Item[]){
-    let empty_row = []
-    if( min_rows_table - table_data.length > 0)
-      empty_row = Array(min_rows_table - table_data.length).fill( new Item() )
-    return table_data.concat( empty_row )
+  static fillEmptiness(min_rows_table: number, table_header: string[], table_data: Item[]){
+    let table_data_empty = []
+    if( min_rows_table - table_data.length > 0){
+      const data = Array(table_header.length).fill( "" )
+      table_data_empty = Array(min_rows_table - table_data.length).fill( new Item(data, false) )
+    }
+    return table_data_empty
   }
 
   static removeEmptiness(table_data: Item[]){
-    return table_data.filter( (element) => element.code != undefined)
+    return table_data.filter( (element) => element.data != undefined)
   }
 
   static removeSelection(table_data: Item[]){
-    table_data.map( (element) => { if(element.code != undefined) element.selected = false })
+    table_data.map( (element) => { if(element.data != undefined) element.selected = false })
     return table_data
   }
 
 }
 
 export class Item {
-  constructor(public code: string = undefined, 
-              public name: string = undefined, 
+  constructor(public data: any[] = undefined, 
               public selected: boolean = undefined){}
 }
 
@@ -35,12 +35,14 @@ export class Item {
 export class TableComponent implements OnInit {
 
   @Input() table_header: string[] = ["col1", "col2"]
+  @Input() min_rows_table: number = 10;  
   table_data: Item[] = [];
+  table_data_empty: Item[] = [];
 
-  min_rows_table: number = 10;
+
 
   constructor() { 
-    this.table_data = this.generate_random_table_data()
+    this.refresh_random_table_data()
   }
 
   ngOnInit(): void {
@@ -59,24 +61,39 @@ export class TableComponent implements OnInit {
 
   generate_random_table_data(){
     const random_rows : number = Math.floor(Math.random() * Math.floor(this.min_rows_table));
-    let table_data = []
-    for(let i = 0 ; i < random_rows; i++){
-      table_data.push( new Item(this.generate_random_str(4), 'myname', false) )
+    let table_data: Item[] = []
+    for( let i = 0 ; i < random_rows; i++ ){
+      const data: string[] = [];
+      for( let j = 0; j < this.table_header.length; j++ ){
+        data.push(this.generate_random_str(4))
+      }
+      table_data.push( new Item(data, false) )
     }
 
     // Complete table with empty rows
-    table_data = ItemArrayUtils.fillEmptiness(this.min_rows_table, table_data)
-    return table_data;
+    const table_data_empty = ItemArrayUtils.fillEmptiness(this.min_rows_table, this.table_header, table_data)
+    return [table_data, table_data_empty];
+  }
+
+  fillEmptiness(){
+    this.table_data_empty = []
+
+
+    if( this.min_rows_table - this.table_data.length > 0){
+      const data = Array(this.table_header.length).fill( "" )
+      this.table_data_empty = Array(this.min_rows_table - this.table_data.length).fill( new Item(data, false) )
+    }
   }
 
   refresh_random_table_data(){
-    this.table_data = this.generate_random_table_data()
+    [this.table_data, this.table_data_empty] = 
+      this.generate_random_table_data()
   }
   
   // Selectable items
-  onClickItem(event: MouseEvent, code: string){
-    if( code == undefined ) return;
-    const index = this.table_data.findIndex( (element) => element.code == code)
+  onClickItem(event: MouseEvent, id: string){
+    if( id == undefined ) return;
+    const index = this.table_data.findIndex( (element) => element.data[0] == id)
     this.table_data[index].selected = !this.table_data[index].selected; 
   }
 

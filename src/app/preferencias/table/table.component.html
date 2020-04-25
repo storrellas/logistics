@@ -6,12 +6,12 @@
       </tr>
     </thead>
     <tbody class="body">
-      <tr *ngFor="let data of table_data">
-          <td (click)="onClickItem($event, data.code)"
-              [ngClass]="{'selected': data.selected }">{{data.code}}</td>
-
-          <td (click)="onClickItem($event, data.code)"
-              [ngClass]="{'selected': data.selected }">{{data.name}}</td>
+      <tr *ngFor="let row of table_data">
+          <td *ngFor="let value of row.data" (click)="onClickItem($event, row.data[0])"
+              [ngClass]="{'selected': row.selected }">{{value}}</td>            
+      </tr>
+      <tr *ngFor="let row of table_data_empty">
+          <td *ngFor="let value of row.data"></td>            
       </tr>
     </tbody>
   </table>
