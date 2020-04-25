@@ -1,4 +1,5 @@
 <div class="d-flex w-100 content">
     <label for="{{id}}" class="w-50">{{name}}</label>
     <input type="text" class="form-control w-50" id="{{id}}" value="{{value}}">
+    <fa-icon [style.visibility]="isSearch ? 'visible' : 'hidden'" [icon]="faSearch"></fa-icon>
 </div>

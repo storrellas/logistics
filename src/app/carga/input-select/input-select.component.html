@@ -3,4 +3,5 @@
     <select id="{{id}}" class="form-control w-50">
         <option *ngFor="let option of option_list">{{option}}</option>
     </select>
+    <fa-icon [style.visibility]="isSearch ? 'visible' : 'hidden'" [icon]="faSearch"></fa-icon>
 </div>
