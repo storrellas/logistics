@@ -5,10 +5,13 @@ import { CargaComponent } from './carga.component';
 // Import
 import { PorticCommonModule } from '../portic-common/portic-common.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InputReadonlyComponent } from './input-readonly/input-readonly.component';
+import { InputSelectComponent } from './input-select/input-select.component';
+import { InputTextComponent } from './input-text/input-text.component';
 
 
 @NgModule({
-  declarations: [CargaComponent],
+  declarations: [CargaComponent, InputReadonlyComponent, InputSelectComponent, InputTextComponent],
   imports: [
     CommonModule,
     NgbModule,
