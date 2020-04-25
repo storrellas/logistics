@@ -14,8 +14,8 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'base', component: BaseComponent },
   { path: 'lista', component: ListaComponent },
-  { path: 'lista/carga', component: CargaComponent },
-  { path: 'lista/descarga', component: DescargaComponent },
+  { path: 'carga', component: CargaComponent },
+  { path: 'descarga', component: DescargaComponent },
   { path: 'preferencias', component: PreferenciasComponent },
 ];
 
