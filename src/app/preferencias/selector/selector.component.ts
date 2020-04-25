@@ -1,7 +1,6 @@
 import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
-//import { TableComponent, ItemArrayUtils, Item } from '../table/table.component';
-import { TableComponent, ItemArrayUtils, Item } from '../../portic-common/portic-common.module';
+import { TableComponent, RowArrayUtils, Row } from '../../portic-common/portic-common.module';
 
 @Component({
   selector: 'app-selector',
@@ -26,11 +25,11 @@ export class SelectorComponent implements OnInit {
   }
 
   // Candidate <-> Selected
-  onSource2Destination(source: Item[], destination: Item[]){
+  onSource2Destination(source: Row[], destination: Row[]){
 
     // Remove undefined
-    let filter_source = ItemArrayUtils.removeEmptiness(source)
-    let filter_destination = ItemArrayUtils.removeEmptiness(destination)
+    let filter_source = RowArrayUtils.removeEmptiness(source)
+    let filter_destination = RowArrayUtils.removeEmptiness(destination)
 
     // Get selected
     let items_to_move = filter_source.filter( (element) => element.selected == true)
@@ -40,8 +39,8 @@ export class SelectorComponent implements OnInit {
     destination = filter_destination.concat(items_to_move)
 
     // Mark all as unselected
-    source = ItemArrayUtils.removeSelection(source)
-    destination = ItemArrayUtils.removeSelection(destination)
+    source = RowArrayUtils.removeSelection(source)
+    destination = RowArrayUtils.removeSelection(destination)
 
     return [source, destination]
   }
@@ -64,15 +63,15 @@ export class SelectorComponent implements OnInit {
     this.table_selected_component.fillEmptiness()
   }
 
-  onAllSource2Destination(source: Item[], destination: Item[]){
+  onAllSource2Destination(source: Row[], destination: Row[]){
     // Add items
-    let filter_source = ItemArrayUtils.removeEmptiness(source)
-    let filter_destination = ItemArrayUtils.removeEmptiness(destination)
+    let filter_source = RowArrayUtils.removeEmptiness(source)
+    let filter_destination = RowArrayUtils.removeEmptiness(destination)
 
     destination = filter_destination.concat(filter_source)
 
     // Mark all as unselected
-    destination = ItemArrayUtils.removeSelection(destination)
+    destination = RowArrayUtils.removeSelection(destination)
 
     // Remove items on source
     source = []
@@ -80,7 +79,7 @@ export class SelectorComponent implements OnInit {
     return [source, destination]
   }
 
-  onAllCandidate2Selected(event: MouseEvent){    
+  onAllCandidate2Selected(event: MouseEvent){
     [this.table_candidate_component.table_data, 
       this.table_selected_component.table_data] = 
       this.onAllSource2Destination( this.table_candidate_component.table_data, 
@@ -89,6 +88,7 @@ export class SelectorComponent implements OnInit {
     this.table_candidate_component.fillEmptiness()
     this.table_selected_component.fillEmptiness()                                    
   }
+  
   onAllSelected2Candidate(event: MouseEvent){
     [this.table_selected_component.table_data, this.table_candidate_component.table_data] = 
       this.onAllSource2Destination( this.table_selected_component.table_data, 

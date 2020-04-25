@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 // Declarations
 import { ModalComponent } from './modal/modal.component';
 import { BaseComponent } from './base/base.component';
-import { TableComponent, Item, ItemArrayUtils } from './table/table.component'
+import { TableComponent, Row, RowArrayUtils } from './table/table.component'
 
 // Imports - Other
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,4 +48,4 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class PorticCommonModule { }
 
-export { BaseComponent, TableComponent, Item, ItemArrayUtils };
+export { BaseComponent, TableComponent, Row, RowArrayUtils };

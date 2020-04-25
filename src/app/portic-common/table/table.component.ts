@@ -1,28 +1,28 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-export class ItemArrayUtils {
+export class RowArrayUtils {
 
-  static fillEmptiness(min_rows_table: number, table_header: string[], table_data: Item[]){
+  static fillEmptiness(min_rows_table: number, table_header: string[], table_data: Row[]){
     let table_data_empty = []
     if( min_rows_table - table_data.length > 0){
       const data = Array(table_header.length).fill( "" )
-      table_data_empty = Array(min_rows_table - table_data.length).fill( new Item(data, false) )
+      table_data_empty = Array(min_rows_table - table_data.length).fill( new Row(data, false) )
     }
     return table_data_empty
   }
 
-  static removeEmptiness(table_data: Item[]){
+  static removeEmptiness(table_data: Row[]){
     return table_data.filter( (element) => element.data != undefined)
   }
 
-  static removeSelection(table_data: Item[]){
+  static removeSelection(table_data: Row[]){
     table_data.map( (element) => { if(element.data != undefined) element.selected = false })
     return table_data
   }
 
 }
 
-export class Item {
+export class Row {
   constructor(public data: any[] = undefined, 
               public selected: boolean = undefined){}
 }
@@ -36,10 +36,8 @@ export class TableComponent implements OnInit {
 
   @Input() table_header: string[] = ["col1", "col2"]
   @Input() min_rows_table: number = 10;  
-  table_data: Item[] = [];
-  table_data_empty: Item[] = [];
-
-
+  table_data: Row[] = [];
+  table_data_empty: Row[] = [];
 
   constructor() { 
     this.refresh_random_table_data()
@@ -47,7 +45,6 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 
   generate_random_str(length) {
     var result           = '';
@@ -61,27 +58,25 @@ export class TableComponent implements OnInit {
 
   generate_random_table_data(){
     const random_rows : number = Math.floor(Math.random() * Math.floor(this.min_rows_table));
-    let table_data: Item[] = []
+    let table_data: Row[] = []
     for( let i = 0 ; i < random_rows; i++ ){
       const data: string[] = [];
       for( let j = 0; j < this.table_header.length; j++ ){
         data.push(this.generate_random_str(4))
       }
-      table_data.push( new Item(data, false) )
+      table_data.push( new Row(data, false) )
     }
 
     // Complete table with empty rows
-    const table_data_empty = ItemArrayUtils.fillEmptiness(this.min_rows_table, this.table_header, table_data)
+    const table_data_empty = RowArrayUtils.fillEmptiness(this.min_rows_table, this.table_header, table_data)
     return [table_data, table_data_empty];
   }
 
   fillEmptiness(){
     this.table_data_empty = []
-
-
     if( this.min_rows_table - this.table_data.length > 0){
       const data = Array(this.table_header.length).fill( "" )
-      this.table_data_empty = Array(this.min_rows_table - this.table_data.length).fill( new Item(data, false) )
+      this.table_data_empty = Array(this.min_rows_table - this.table_data.length).fill( new Row(data, false) )
     }
   }
 
