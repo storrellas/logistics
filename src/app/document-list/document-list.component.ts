@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-lista',
-  templateUrl: './lista.component.html',
-  styleUrls: ['./lista.component.scss']
+  templateUrl: './document-list.component.html',
+  styleUrls: ['./document-list.component.scss']
 })
-export class ListaComponent implements OnInit {
+export class DocumentListComponent implements OnInit {
 
   table_header: string[] = ["Barco", "Llegada", "Salida", "Tipo Doc", "Tipo Carga", "Emisor",
                               "Receptor", "Estado", "Fecha", "No Documento", "Versión", "Usuario", "Estado Resguardo"]

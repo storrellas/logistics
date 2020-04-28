@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListaComponent } from './lista.component';
+import { DocumentListComponent } from './document-list.component';
 
 // imports
 import { PorticCommonModule } from '../portic-common/portic-common.module';
@@ -8,12 +8,12 @@ import { PorticCommonModule } from '../portic-common/portic-common.module';
 
 
 @NgModule({
-  declarations: [ListaComponent],
+  declarations: [DocumentListComponent],
   imports: [
     CommonModule,
     PorticCommonModule
   ]
 })
-export class ListaModule { }
+export class DocumentListModule { }
 
-export { ListaComponent };
+export { DocumentListComponent };
