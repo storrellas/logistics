@@ -7,12 +7,11 @@ import { CargaComponent } from './carga.component';
 import { PorticCommonModule } from '../portic-common/portic-common.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ContainerListComponent } from './container-list/container-list.component';
-import { RodadoListComponent } from './rodado-list/rodado-list.component';
+
 
 
 @NgModule({
-  declarations: [CargaComponent, ContainerListComponent, RodadoListComponent],
+  declarations: [CargaComponent],
   imports: [
     CommonModule,
     NgbModule,

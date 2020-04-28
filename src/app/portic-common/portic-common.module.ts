@@ -10,6 +10,8 @@ import { TableComponent, Row, RowArrayUtils } from './table/table.component'
 import { InputReadonlyComponent } from './input-readonly/input-readonly.component';
 import { InputSelectComponent } from './input-select/input-select.component';
 import { InputTextComponent } from './input-text/input-text.component';
+import { ContainerListComponent } from './container-list/container-list.component';
+import { RodadoListComponent } from './rodado-list/rodado-list.component';
 
 // Imports - Other
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,6 +36,8 @@ import { MatDialog } from '@angular/material/dialog';
     InputReadonlyComponent,
     InputSelectComponent,
     InputTextComponent,
+    ContainerListComponent,
+    RodadoListComponent,
   ],
   exports: [
     BaseComponent, 
@@ -41,6 +45,8 @@ import { MatDialog } from '@angular/material/dialog';
     InputReadonlyComponent,
     InputSelectComponent,
     InputTextComponent,
+    ContainerListComponent,
+    RodadoListComponent,    
   ],
   imports: [
     CommonModule,
@@ -62,3 +68,4 @@ export class PorticCommonModule { }
 
 export { BaseComponent, TableComponent, Row, RowArrayUtils };
 export { InputReadonlyComponent, InputSelectComponent, InputTextComponent};
+export { ContainerListComponent, RodadoListComponent};
