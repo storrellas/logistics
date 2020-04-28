@@ -12,7 +12,6 @@ export class DocumentComponent implements OnInit {
 
   @Input()
   set type(value: string) {
-    console.log("MyTest", value)
     if(value == "carga"){
       this.port_id = "port_load";
       this.port_name = "Puerto de Carga";
