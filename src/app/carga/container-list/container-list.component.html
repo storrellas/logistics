@@ -1,0 +1,14 @@
+<div class="doc-tool w-100 mt-3">
+  <input-select [id]="'list_sender'" 
+      [name]="'Filtrar por'" 
+      [option_list]="['12345', '34667']">
+  </input-select>  
+  <button type="button" class="btn">Filtrar</button>
+  <button type="button" class="tool">Carga Excel</button>
+  <button type="button" class="tool">Importar</button>
+  <button type="button" class="tool">Añadir</button>
+  <button type="button" class="tool">Eliminar</button>
+  <button type="button" class="tool">Modificar</button>
+</div>
+<app-table #tbl_selected [table_header]="table_header" [min_rows_table]="10">
+</app-table>
