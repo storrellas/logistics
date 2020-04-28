@@ -7,6 +7,9 @@ import { RouterModule } from '@angular/router';
 import { ModalComponent } from './modal/modal.component';
 import { BaseComponent } from './base/base.component';
 import { TableComponent, Row, RowArrayUtils } from './table/table.component'
+import { InputReadonlyComponent } from './input-readonly/input-readonly.component';
+import { InputSelectComponent } from './input-select/input-select.component';
+import { InputTextComponent } from './input-text/input-text.component';
 
 // Imports - Other
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,9 +30,18 @@ import { MatDialog } from '@angular/material/dialog';
   declarations: [
     BaseComponent,
     ModalComponent,
-    TableComponent
+    TableComponent,
+    InputReadonlyComponent,
+    InputSelectComponent,
+    InputTextComponent,
   ],
-  exports: [BaseComponent, TableComponent],
+  exports: [
+    BaseComponent, 
+    TableComponent,
+    InputReadonlyComponent,
+    InputSelectComponent,
+    InputTextComponent,
+  ],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -49,3 +61,4 @@ import { MatDialog } from '@angular/material/dialog';
 export class PorticCommonModule { }
 
 export { BaseComponent, TableComponent, Row, RowArrayUtils };
+export { InputReadonlyComponent, InputSelectComponent, InputTextComponent};
