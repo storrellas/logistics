@@ -1,3 +1,119 @@
 <portic-base>
-  <p>descarga works!</p>
-</portic-base>  
+    <div class="tab">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+          <li [ngbNavItem]="1">
+            <a ngbNavLink>Datos Generales</a>
+            <ng-template ngbNavContent>
+              <div class="content p-3">
+                <p>Lista de Carga</p>
+                <div class="d-flex w-100 justify-content-center pl-3 pr-3">
+                    <div class="w-50 pr-3">
+                        <div class="mt-3">
+                            <input-readonly [id]="'id_list'" 
+                                            [name]="'Numero de Lista'" 
+                                            [value]="'12345'"
+                                            [search]="true">
+                            </input-readonly>    
+                        </div>
+                        <div class="mt-3">
+                            <input-select [id]="'cargo_type'" 
+                                            [name]="'Tipo de Carga'" 
+                                            [option_list]="['12345', '34667']">
+                            </input-select>    
+                        </div>
+                        <div class="mt-3">
+                            <input-select [id]="'receiver'"
+                                            [name]="'Receptor del mensaje'" 
+                                            [option_list]="['12345', '34667']"
+                                            [search]="true">
+                            </input-select>
+                        </div>
+                        <div class="mt-3">
+                            <input-text [id]="'port_unload'"
+                                        [name]="'Puerto de Descarga'" 
+                                        [value]="'12345'"
+                                        [search]="true">
+                            </input-text>
+                        </div>
+                        <div class="mt-3">
+                            <input-select [id]="'list_sender'" 
+                                            [name]="'Remitente de la lista'" 
+                                            [option_list]="['12345', '34667']">
+                            </input-select>    
+                        </div>
+                        <div class="mt-3">
+                            <input-text [id]="'travel'"
+                                        [name]="'Número de viaje'" 
+                                        [value]="'12345'">
+                            </input-text>
+                        </div>
+                    </div>
+                    <div class="w-50 pl-3">
+                        <div class="mt-3">
+                            <input-readonly [id]="'ship'" 
+                                            [name]="'Nombre Buque'" 
+                                            [value]="'12345'">
+                            </input-readonly>
+                        </div>
+                        <div class="mt-3">
+                            <input-text [id]="'scale'" 
+                                            [name]="'Número escala'" 
+                                            [value]="'12345'">
+                            </input-text>
+                        </div>
+                        <div class="mt-3">
+                            <input-select [id]="'cargo_terminal'" 
+                                            [name]="'Terminal de Carga'" 
+                                            [option_list]="['12345', '34667']">
+                            </input-select>    
+                        </div>
+                        <div class="mt-3">
+                            <input-select [id]="'receiver'" 
+                                            [name]="'Receptor de la lista'" 
+                                            [option_list]="['12345', '34667']">
+                            </input-select>    
+                        </div>
+                        <div class="mt-3">
+                            <input-select [id]="'line_code'" 
+                                            [name]="'Código de línea'" 
+                                            [option_list]="['12345', '34667']">
+                            </input-select>    
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right mt-3 pl-3 pr-3">                    
+                    <button type="button" class="btn">Guardar</button>
+                </div>
+              </div>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="2">
+            <a ngbNavLink>Contenedores</a>
+            <ng-template ngbNavContent>
+              <div class="content p-3">
+                <container-list></container-list>
+              </div>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="3">
+            <a ngbNavLink>Rodados</a>
+            <ng-template ngbNavContent>
+                <div class="content p-3">
+                    <rodado-list></rodado-list>
+                </div>
+            </ng-template>
+            </li>
+        </ul>        
+        <div [ngbNavOutlet]="nav"></div>
+    </div>
+  </portic-base>
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
