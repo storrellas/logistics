@@ -7,11 +7,12 @@ import { CargaComponent } from './carga.component';
 import { PorticCommonModule } from '../portic-common/portic-common.module'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DocumentComponent } from './document/document.component';
 
 
 
 @NgModule({
-  declarations: [CargaComponent],
+  declarations: [CargaComponent, DocumentComponent],
   imports: [
     CommonModule,
     NgbModule,
