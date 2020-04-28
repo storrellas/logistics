@@ -12,6 +12,8 @@ import { InputSelectComponent } from './input-select/input-select.component';
 import { InputTextComponent } from './input-text/input-text.component';
 import { ContainerListComponent } from './container-list/container-list.component';
 import { RodadoListComponent } from './rodado-list/rodado-list.component';
+import { DocumentComponent } from './document/document.component';
+
 
 // Imports - Other
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -38,6 +40,7 @@ import { MatDialog } from '@angular/material/dialog';
     InputTextComponent,
     ContainerListComponent,
     RodadoListComponent,
+    DocumentComponent,
   ],
   exports: [
     BaseComponent, 
@@ -46,7 +49,8 @@ import { MatDialog } from '@angular/material/dialog';
     InputSelectComponent,
     InputTextComponent,
     ContainerListComponent,
-    RodadoListComponent,    
+    RodadoListComponent,
+    DocumentComponent,
   ],
   imports: [
     CommonModule,
