@@ -1,6 +1,6 @@
 #Grab the latest alpine image
 FROM nginx:1.15
-COPY ./dist/coprar-40-front/ /usr/share/nginx/html
+COPY ./dist/coprar-40-front/ /usr/share/nginx/html/coprar/
 
 
 # Change permissions
