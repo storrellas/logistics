@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'base', component: BaseComponent },
   { path: 'document/list', component: DocumentListComponent },
   { path: 'carga', component: CargaComponent },
+  { path: 'carga/:id', component: CargaComponent },
   { path: 'descarga', component: DescargaComponent },
   { path: 'preferencias', component: PreferenciasComponent },
 ];
