@@ -1,8 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
+
+export class Header {
+  constructor(public value: string = undefined, 
+              public sorted: boolean = false,
+              public sorted_up: boolean = false){}
+}
+
+export class Row {
+  constructor(public data: any[] = undefined, 
+              public selected: boolean = undefined){}
+}
 
 export class RowArrayUtils {
 
-  static fillEmptiness(min_rows_table: number, table_header: string[], table_data: Row[]){
+  static fillEmptiness(min_rows_table: number, table_header: Header[], table_data: Row[]){
     let table_data_empty = []
     if( min_rows_table - table_data.length > 0){
       const data = Array(table_header.length).fill( "" )
@@ -22,10 +34,6 @@ export class RowArrayUtils {
 
 }
 
-export class Row {
-  constructor(public data: any[] = undefined, 
-              public selected: boolean = undefined){}
-}
 
 @Component({
   selector: 'app-table',
@@ -34,10 +42,22 @@ export class Row {
 })
 export class TableComponent implements OnInit {
 
-  @Input() table_header: string[] = ["col1", "col2"]
+  @Input() table_header_local: Header[] = [];
   @Input() min_rows_table: number = 10;  
   table_data: Row[] = [];
   table_data_empty: Row[] = [];
+
+  faSortUp = faSortUp;
+  faSortDown = faSortDown;
+  sorted: boolean = true;
+  sorted_up: boolean = true;
+
+  @Input()
+  set table_header(table_header: string[]){
+    for (const header of table_header) {
+      this.table_header_local.push ( new Header(header) );
+    }
+  }
 
   constructor() { 
   }
@@ -61,21 +81,21 @@ export class TableComponent implements OnInit {
     let table_data: Row[] = []
     for( let i = 0 ; i < random_rows; i++ ){
       const data: string[] = [];
-      for( let j = 0; j < this.table_header.length; j++ ){
+      for( let j = 0; j < this.table_header_local.length; j++ ){
         data.push(this.generate_random_str(4))
       }
       table_data.push( new Row(data, false) )
     }
 
     // Complete table with empty rows
-    const table_data_empty = RowArrayUtils.fillEmptiness(this.min_rows_table, this.table_header, table_data)
+    const table_data_empty = RowArrayUtils.fillEmptiness(this.min_rows_table, this.table_header_local, table_data)
     return [table_data, table_data_empty];
   }
 
   fillEmptiness(){
     this.table_data_empty = []
     if( this.min_rows_table - this.table_data.length > 0){
-      const data = Array(this.table_header.length).fill( "" )
+      const data = Array(this.table_header_local.length).fill( "" )
       this.table_data_empty = Array(this.min_rows_table - this.table_data.length).fill( new Row(data, false) )
     }
   }
@@ -84,13 +104,40 @@ export class TableComponent implements OnInit {
     [this.table_data, this.table_data_empty] = 
       this.generate_random_table_data()
   }
-  
-  // Selectable items
-  onClickItem(event: MouseEvent, id: string){
+
+  onClickHeader(event: MouseEvent, value: string){
+    let column_counter = 0, column_target = 0;
+    let sorted_up = false;
+    for (const header of this.table_header_local) {
+      header.sorted = (header.value == value);
+      header.sorted_up = (header.value == value)?!header.sorted_up:true;
+      sorted_up = header.sorted_up;
+      
+      // Identify column to be sorted by
+      if(header.value == value){
+        column_target = column_counter;
+      }
+      column_counter = column_counter + 1;
+    }
+
+    console.log("column_target ", column_target)
+    console.log("column_target ", column_target)
+
+    // Sorting elements
+    this.table_data.sort((element1, element2) => {
+      if( sorted_up ){
+        return (element1.data[column_target] < element2.data[column_target]?1:-1)
+      }else{
+        return (element1.data[column_target] >= element2.data[column_target]?1:-1)
+      }
+        
+    })
+  }
+
+  onClickRow(event: MouseEvent, id: string){
     if( id == undefined ) return;
     const index = this.table_data.findIndex( (element) => element.data[0] == id)
     this.table_data[index].selected = !this.table_data[index].selected; 
   }
-
 
 }

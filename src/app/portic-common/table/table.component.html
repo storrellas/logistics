@@ -2,12 +2,17 @@
   <table class="item-table w-100">
     <thead>
       <tr class="title">
-        <th *ngFor="let header of table_header">{{header}}</th>
+        <th *ngFor="let header of table_header_local" (click)="onClickHeader($event, header.value)">
+            {{header.value}}
+            <span [style.visibility]="header.sorted ? 'visible' : 'hidden'">
+            <fa-icon [icon]="header.sorted_up?faSortUp:faSortDown"></fa-icon>
+          </span>
+        </th>
       </tr>
     </thead>
     <tbody class="body">
       <tr *ngFor="let row of table_data">
-          <td *ngFor="let value of row.data" (click)="onClickItem($event, row.data[0])"
+          <td *ngFor="let value of row.data" (click)="onClickRow($event, row.data[0])"
               [ngClass]="{'selected': row.selected }">{{value}}</td>            
       </tr>
       <tr *ngFor="let row of table_data_empty">

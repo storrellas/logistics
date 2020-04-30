@@ -20,8 +20,11 @@
         border: 1px solid $border;
         @include portic-bold-mixin;        
       }
-    }
 
+      th:hover {
+        background: $table-header-hover;
+      }
+    }
 
 
     .body{
