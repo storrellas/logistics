@@ -9,6 +9,7 @@ export class DocumentListComponent implements OnInit {
 
   table_header: string[] = ["Barco", "Llegada", "Salida", "Tipo Doc", "Tipo Carga", "Emisor",
                               "Receptor", "Estado", "Fecha", "No Documento", "Versión", "Usuario", "Estado Resguardo"]
+  min_rows_table: number = 10;
   table_data: object[];
   table_rows: number[];
 
